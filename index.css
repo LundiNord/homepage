@@ -1,0 +1,55 @@
+/* leonbruns.de CSS File */
+
+:root {
+    --background-color: #ffffff;
+    --text-color: #444444;
+    --link-color: #007BFF;
+}
+[data-theme="dark"] {
+    --background-color: #121212;
+    --text-color: #e0e0e0;
+    --link-color: #bb86fc;
+}
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 40px auto;
+    max-width: 650px;
+    line-height: 1.6;
+    font-size: 18px;
+    padding: 0 10px;
+}
+h1, h2, h3 {
+    line-height: 1.2;
+}
+a {
+    text-decoration: none;
+    color: var(--link-color);
+}
+a:hover {
+    text-decoration: underline;
+}
+p {
+    margin: 0 0 1px;
+}
+.header-right {
+    float: right;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.theme-toggle {
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--link-color);
+    font-size: 16px;
+    padding: 0;
+}
+.privacy-link {
+    color: var(--link-color);
+    text-decoration: none;
+}
+.privacy-link:hover {
+    text-decoration: underline;
+}
