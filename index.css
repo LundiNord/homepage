@@ -53,3 +53,7 @@ p {
 .privacy-link:hover {
     text-decoration: underline;
 }
+.privacy-link, .theme-toggle { /* force same font */
+    font-family: inherit;
+    font-size: inherit;
+}
