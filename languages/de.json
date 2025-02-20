@@ -9,5 +9,8 @@
   "contact": "Kontakt:",
   "about": "Über mich.",
   "about1" : "Hallo! Ich bin Leon Bruns, Student der Informatik am Karlsruher Institut für Technologie.",
-  "about2" : "Ich interessiere mich für Sicherheit, Server und alles, was interessant klingt."
+  "about2" : "Ich interessiere mich für Sicherheit, Server und alles, was interessant klingt.",
+  "about3" : "In meiner Freizeit gehe ich gerne <a href=\"hiking.html\">wandern</a>.",
+  "description_hiking": "Wanderblog.",
+  "title_hiking": "Wandern."
 }
