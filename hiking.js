@@ -34,7 +34,7 @@ fetch("gpx/test_processed.gpx")
 
 //-----------------------------Mapbox Stuff-----------------------------------
 
-mapboxgl.accessToken = 'pk.eyJ1Ijoibnl4bm9yZCIsImEiOiJjbTdkNjEyOGYweHk4Mm1zZ3RoYXB2Mm5kIn0.pvXwp9Cj4S3ySC_0cpQP8w';
+mapboxgl.accessToken = 'pk.eyJ1Ijoibnl4bm9yZCIsImEiOiJjbTdkZDZoeGswMXpkMmlzYjZzYnNuMGthIn0.bHJF97xa3uu3Vr4xj4tgWQ';
 const map = new mapboxgl.Map({
     container: 'map', // container ID
     center: [18.7502, 68.3371], // starting position [lng, lat]. Note that lat must be set between -90 and 90
