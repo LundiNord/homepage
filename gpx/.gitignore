@@ -1,0 +1,5 @@
+# Ignore all .gpx files
+*.gpx
+
+# Do not ignore .gpx files ending with _processed.gpx
+!*_processed.gpx
