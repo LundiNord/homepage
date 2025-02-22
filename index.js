@@ -11,6 +11,7 @@ function toggleTheme() {
     localStorage.setItem("theme", newTheme);
     updateButtonText(newTheme);
 }
+//window.toggleTheme = toggleTheme; // Make the function globally accessible
 function detectSystemTheme() {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
