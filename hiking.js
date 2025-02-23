@@ -9,13 +9,13 @@ function getStandardLeafletMap(gpxTrack, day, containerID) {
         maxZoom: 19,
         attribution: 'Daten:  &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, SRTM | Darstellung: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/" >CC-BY-SA</a>)'
     }).addTo(mapL);
-    let test = L.tileLayer('https://tile.thunderforest.nyxnord.de/{z}/{x}/{y}.png', {
+    let thunderforest = L.tileLayer('https://tile.thunderforest.nyxnord.de/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: 'Maps &copy; <a href="https://www.thunderforest.com/">Thunderforest</a>, Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
     });
     var baseMaps = {
         "OpenTopoMap": openTopo,
-        "OpenStreetMap.HOT": test
+        "Thunderforest Outdoors": thunderforest
     };
     const options = {
         async: true,
