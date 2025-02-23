@@ -10,6 +10,7 @@ function toggleTheme() {
     document.documentElement.setAttribute("data-theme", newTheme);
     localStorage.setItem("theme", newTheme);
     updateButtonText(newTheme);
+    umami.track('Theme switch');
 }
 //window.toggleTheme = toggleTheme; // Make the function globally accessible
 function detectSystemTheme() {
@@ -50,6 +51,7 @@ async function changeLanguage() {
     if (language === 'de-DE' || language === 'de') {
         langData = await fetchLanguageData('de');
         updateContent(langData);
+        umami.track('Changed language to German');
         //alert(language);
     }
 }

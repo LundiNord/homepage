@@ -41,5 +41,17 @@
     <span data-lang="contact">Contact:</span> <a href="mailto:contact@leonbruns.de">contact@leonbruns.de</a>
 </p>
 
+<script type="text/javascript">
+    (() => {
+        const name = 'outbound-link-click';
+        document.querySelectorAll('a').forEach(a => {
+            if (a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
+                a.setAttribute('data-umami-event', name);
+                a.setAttribute('data-umami-event-url', a.href);
+            }
+        });
+    })();
+</script>
+
 </body>
 </html>
