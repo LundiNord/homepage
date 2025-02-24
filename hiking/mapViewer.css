@@ -1,0 +1,23 @@
+
+:root {
+    --border-color: #000000;
+}
+[data-theme="dark"] {
+    --border-color: #ffffff;
+}
+
+body {
+    margin: 10px 30px;
+    max-width: none;
+    line-height: 1.6;
+    font-size: 18px;
+    padding: 0 10px;
+}
+
+.map-container {
+    width: 100%;
+    height: 1000px;
+    margin: 20px auto; /* Center the container */
+    border: 2px solid var(--border-color);
+}
+.map { width: 100%; height: 100%; }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-lang="title_hiking">Hiking.</title>
+    <meta name="description" content="Hiking Blog of Leon Bruns">
+    <meta name="keywords" content="Leon Bruns, Webpage, Blog, Hiking, Map, Satellite">
+    <link id="css" rel="stylesheet" type="text/css" href="../index.css">
+    <link id="css2" rel="stylesheet" type="text/css" href="mapViewer.css">
+    <link rel="stylesheet" href="../libs/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="../libs/leaflet-fullscreen/Control.FullScreen.css" />
+    <link rel="stylesheet" href="../libs/leaflet-locate/L.Control.Locate.min.css" />
+    <script src="../libs/leaflet/leaflet.js"></script>
+    <link rel="stylesheet" href="../libs/leaflet-fullscreen/Control.FullScreen.css" />
+    <script src="../libs/leaflet-fullscreen/Control.FullScreen.js"></script>
+    <script src="../libs/leaflet-gpx/gpx.min.js"></script>
+    <script src="../libs/leaflet-locate/L.Control.Locate.min.js" charset="utf-8"></script>
+    <script src="../index.js" type="module"></script>
+    <script src="hiking.js" type="module"></script>
+    <script src="mapViewer.js" type="module"></script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="c1063cac-c18a-4475-bbc4-b3b95df370aa"></script>
+</head>
+
+<body>
+<header>
+    <div class="header-right">
+        <a href="../hiking.html" class="privacy-link" data-lang="back">back</a>
+        |
+        <button class="theme-toggle" onclick="toggleTheme()">Dark Mode</button>
+    </div>
+    <h1>Map Viewer.</h1>
+</header>
+
+<div class="map-container"><div class="map" id="big-map"></div></div>
+
+
+<br>
+<p> -------------------------------------------------- </p>
+<p>
+    <a href="../privacy.html" class="privacy-link" data-lang="privacy">Privacy</a>
+    |
+    <a href="https://github.com/LundiNord/homepage">Source</a>
+</p>
+
+</body>
+</html>

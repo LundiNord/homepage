@@ -4,7 +4,7 @@ let language = window.navigator.language;
 let langData = {};
 
 //Theme Switcher
-function toggleTheme() {
+export function toggleTheme() {
     const currentTheme = document.documentElement.getAttribute("data-theme");
     const newTheme = currentTheme === "dark" ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", newTheme);
