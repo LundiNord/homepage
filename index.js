@@ -108,12 +108,13 @@ search.addEventListener('keyup', function() {
             searchResults.appendChild(resultElement);
         }
     });
-    umami.track('Search', query);
+    umami.track("Search", { event_name: "Search", search_data: query });
 });
 
 // Search for input string in all HTML files
 async function fulltextSearch(input) {
-    const pages = ['hiking/sweden2024.html', 'hiking/norwaySweden2023.html'];
+    const pages = ['/hiking/sweden2024.html', '/hiking/norwaySweden2023.html', '/hiking/mapViewer.html', '/hiking.html',
+        '/index.html', '/privacy.html'];
     let results = [];
     for (const page of pages) {
         try {
@@ -163,8 +164,10 @@ async function recursiveSearch(node, input, page) {
     // Process child nodes
     if (node.childNodes && node.childNodes.length > 0) {
         for (const child of node.childNodes) {
-            const childResults = await recursiveSearch(child, input, page);
-            results = results.concat(childResults);
+            if (child.nodeName.toLowerCase() !== 'script') {
+                const childResults = await recursiveSearch(child, input, page);
+                results = results.concat(childResults);
+            }
         }
     }
     return results;

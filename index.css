@@ -82,4 +82,5 @@ p {
     border: 1px solid var(--text-color);
     display: none;
     line-height: 90%;
+    z-index: 9000; /* Ensure it is always above other elements */
 }
