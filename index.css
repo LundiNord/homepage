@@ -37,6 +37,7 @@ p {
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-bottom: 10px;
 }
 .theme-toggle {
     cursor: pointer;
@@ -56,4 +57,29 @@ p {
 .privacy-link, .theme-toggle { /* force same font */
     font-family: inherit;
     font-size: inherit;
+}
+
+.search-box {
+    float: right;
+}
+#search {
+    margin-top: 0;
+    padding: 5px;
+    font-size: 16px;
+    width: 200px;
+    max-width: 300px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+}
+#search-results {
+    margin-top: 10px;
+    width: 100%;
+    max-width: 200px;
+    position:absolute;
+    background-color: var(--background-color);
+    padding: 5px;
+    border: 1px solid var(--text-color);
+    display: none;
+    line-height: 90%;
 }

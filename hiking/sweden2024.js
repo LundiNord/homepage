@@ -1,7 +1,7 @@
 import { getGPXLeafletMap } from './hiking.js';
 
 document.addEventListener("DOMContentLoaded", () =>{
-    const sweden2024Overview = getGPXLeafletMap("gpx/Schweden2024_gesamt_processed.gpx", 20, "sweden2024Overview");
+    const sweden2024Overview = getGPXLeafletMap("gpx/Schweden2024_gesamt_processed.gpx.compressed.gpx", 20, "sweden2024Overview");
     const sweden2024_0 = getGPXLeafletMap("gpx/Schweden2024_Tag0_processed.gpx", 0, "sweden2024_0");
     const sweden2024_1 = getGPXLeafletMap("gpx/Schweden2024_Tag1_processed.gpx", 1, "sweden2024_1");
     const sweden2024_2 = getGPXLeafletMap("gpx/Schweden2024_Tag2_processed.gpx", 2, "sweden2024_2");
