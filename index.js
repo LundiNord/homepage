@@ -1,7 +1,31 @@
 //JS for leonbruns.de
 
+//----------------------------- Localization -----------------------------------
+
 let language = window.navigator.language;
 let langData = {};
+
+function updateContent(langData) {
+    document.querySelectorAll('[data-lang]').forEach(element => {
+        const key = element.getAttribute('data-lang');
+        element.innerHTML = langData[key];
+    });
+}
+async function fetchLanguageData(lang) {
+    const response = await fetch(`languages/${lang}.json`);
+    return response.json();
+}
+async function changeLanguage() {
+    if (language === 'de-DE' || language === 'de') {
+        langData = await fetchLanguageData('de');
+        updateContent(langData);
+        umami.track('Changed language to German');
+        //alert(language);
+    }
+}
+changeLanguage();
+
+//----------------------------- Dark Mode -----------------------------------
 
 //Theme Switcher
 export function toggleTheme() {
@@ -12,7 +36,6 @@ export function toggleTheme() {
     updateButtonText(newTheme);
     umami.track('Theme switch');
 }
-
 //window.toggleTheme = toggleTheme; // Make the function globally accessible
 function detectSystemTheme() {
     const savedTheme = localStorage.getItem("theme");
@@ -26,7 +49,6 @@ function detectSystemTheme() {
         updateButtonText(theme);
     }
 }
-
 function updateButtonText(theme) {
     const button = document.querySelector(".theme-toggle");
     if (Object.keys(langData).length !== 0) {    //check if langData is not empty
@@ -35,34 +57,10 @@ function updateButtonText(theme) {
         button.textContent = theme === "dark" ? "White Mode" : "Dark Mode";
     }
 }
-
 document.querySelector(".theme-toggle").addEventListener("click", toggleTheme);
 detectSystemTheme();
 
-//Localization
-function updateContent(langData) {
-    document.querySelectorAll('[data-lang]').forEach(element => {
-        const key = element.getAttribute('data-lang');
-        element.innerHTML = langData[key];
-    });
-}
-
-async function fetchLanguageData(lang) {
-    const response = await fetch(`languages/${lang}.json`);
-    return response.json();
-}
-
-async function changeLanguage() {
-    if (language === 'de-DE' || language === 'de') {
-        langData = await fetchLanguageData('de');
-        updateContent(langData);
-        umami.track('Changed language to German');
-        //alert(language);
-    }
-}
-
-changeLanguage();
-
+//----------------------------- Search -----------------------------------
 
 //search:
 //get input
@@ -71,10 +69,17 @@ changeLanguage();
 //go up until next linkable element
 //return a link to the element
 
-const search = document.getElementById('search');
-const searchResults = document.getElementById('search-results');
+const search = document.getElementById('search') || null;
+const searchResults = document.getElementById('search-results') || null;
 
-search.addEventListener('keyup', function() {
+try {
+    search.addEventListener('keyup', function() {
+        searchAndDisplay();
+    });
+} catch {
+    console.log('Search not available');}
+
+async function searchAndDisplay() {
     const query = search.value.toLowerCase();
     if (query.length < 2) {
         searchResults.innerHTML = '';
@@ -86,9 +91,9 @@ search.addEventListener('keyup', function() {
         searchResults.innerHTML = '';
         //remove duplicates
         results = results.filter((result, index, self) =>
-            index === self.findIndex((t) => (
-                t.url === result.url
-            ))
+                index === self.findIndex((t) => (
+                    t.url === result.url
+                ))
         );
         // Display results
         if (results.length === 0) {
@@ -108,30 +113,39 @@ search.addEventListener('keyup', function() {
             searchResults.appendChild(resultElement);
         }
     });
-    umami.track("Search", { event_name: "Search", search_data: query });
-});
-
-// Search for input string in all HTML files
-async function fulltextSearch(input) {
-    const pages = ['/hiking/sweden2024.html', '/hiking/norwaySweden2023.html', '/hiking/mapViewer.html', '/hiking.html',
-        '/index.html', '/privacy.html'];
-    let results = [];
+    umami.track("Search", {search_data: query });
+}
+const searchablePages = []  //Array of [document:HTML tree, page:String] pairs
+async function fetchPage() {
+    const pages = ['/hiking/sweden2024.html', '/hiking/norwaySweden2023.html', '/hiking/mapViewer.html',
+        '/hiking.html', '/index.html', '/privacy.html'];
     for (const page of pages) {
         try {
             const response = await fetch(page);
             const html = await response.text();
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
-            // Search through all HTML nodes with text
-            const pageResults = await recursiveSearch(doc.getRootNode(), input, page);
+            searchablePages.push([doc, page]);
+        } catch (error) {
+            console.error(`Error parsing ${page}:`, error);
+        }
+    }
+}
+async function fulltextSearch(input) {  // Search for input string in all HTML files
+    if (searchablePages.length === 0) {
+        await fetchPage();
+    }
+    let results = [];
+    for (const pair of searchablePages) {   //[document:HTML tree, page:String] pairs
+        try {       // Search through all HTML nodes with text
+            const pageResults = await recursiveSearch(pair[0].getRootNode(), input, pair[1]);
             results = results.concat(pageResults);
         } catch (error) {
-            console.error(`Error searching ${page}:`, error);
+            console.error(`Error searching ${pair[1]}:`, error);
         }
     }
     return results;
 }
-
 async function recursiveSearch(node, input, page) {
     let results = [];
     let textContent = "";
