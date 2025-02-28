@@ -61,6 +61,7 @@ p {
 
 .search-box {
     float: right;
+    margin-bottom: 0;
 }
 #search {
     margin-top: 0;
@@ -83,4 +84,8 @@ p {
     display: none;
     line-height: 90%;
     z-index: 9000; /* Ensure it is always above other elements */
+}
+
+p.dashes {
+    margin-top: 2px;
 }
