@@ -22,7 +22,7 @@ search.addEventListener('keyup', function() {
     umami.track("Location Search", {search_data: query });});
 const searchResults = document.getElementById('map-search-results');
 const searchApiUrl = 'https://api.mapbox.com/search/geocode/v6/forward';
-const mapboxToken = 'pk.eyJ1Ijoibnl4bm9yZCIsImEiOiJjbTdkNjEyOGYweHk4Mm1zZ3RoYXB2Mm5kIn0.pvXwp9Cj4S3ySC_0cpQP8w';
+const mapboxToken = 'pk.eyJ1Ijoibnl4bm9yZCIsImEiOiJjbTdkZDZoeGswMXpkMmlzYjZzYnNuMGthIn0.bHJF97xa3uu3Vr4xj4tgWQ';
 
 async function doLocationSearch(query, route) { //0 = no route, 1 = start, 2 = end
     if (query.length < 2) {
@@ -108,8 +108,10 @@ function showRoutePointSearch(data, start) {
             routeResults.style.display = 'none';
             if (start === 1) {
                 startCoords = coordinates;
+                routeStart.value = feature.properties.name;
             } else {
                 endCoords = coordinates;
+                routeEnd.value = feature.properties.name;
             }});
         routeResults.appendChild(resultItem);
         const separator = document.createElement('div');
@@ -124,7 +126,8 @@ function calcRoute() {
         return;
     }
     const routeSearchUrl = "https://api.mapbox.com/directions/v5/mapbox/";
-    const routeProfile = "driving";
+    //const routeProfile = "driving";
+    const routeProfile = "walking";
     let url = `${routeSearchUrl}${routeProfile}/${startCoords[0]},${startCoords[1]};${endCoords[0]},${endCoords[1]}?alternatives=false&geometries=geojson&language=en&overview=simplified&steps=true&access_token=${mapboxToken}`;
     fetch(url)
         .then(response => {

@@ -23,7 +23,6 @@ body {
 .search-box {
     float: right;
     margin-bottom: 10px;
-    margin-left: 10px;
 }
 .map-search {
     margin-top: 5px;
@@ -46,6 +45,14 @@ body {
     line-height: 100%;
     z-index: 9000; /* Ensure it is always above other elements */
 }
+
+#route-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: start;
+}
 #route-end-search-box {
     float: none;
 }
@@ -55,16 +62,18 @@ body {
 #route-button {
     cursor: pointer;
     background: none;
-    border: none;
+    border: 1px solid var(--border-color);
     color: var(--link-color);
     font-size: 16px;
-    padding: 0;
+    padding: 3px 6px;
     margin-top: 5px;
+    height: 32px;
+    align-self: flex-start;
 }
 #route-button:hover {
     text-decoration: underline;
 }
-/*ToDo: reorder with flex box*/
 #route-info {
-    float: right;
+    border: 1px solid var(--border-color);
+    padding: 2px;
 }
