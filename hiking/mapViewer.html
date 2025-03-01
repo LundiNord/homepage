@@ -16,9 +16,9 @@
     <script src="../libs/leaflet-fullscreen/Control.FullScreen.js"></script>
     <script src="../libs/leaflet-gpx/gpx.min.js"></script>
     <script src="../libs/leaflet-locate/L.Control.Locate.min.js" charset="utf-8"></script>
-    <script src="../index.js" type="module"></script>
-    <script src="hiking.js" type="module"></script>
-    <script src="mapViewer.js" type="module"></script>
+    <script src="../index.minified.js" type="module"></script>
+    <script src="hiking.minified.js" type="module"></script>
+    <script src="mapViewer.minified.js" type="module"></script>
     <script defer src="https://analyse.nyxnord.de/script.js" data-website-id="a95c5f81-f3c3-4673-b356-ff7091def24b"></script>
 </head>
 
@@ -33,7 +33,7 @@
 </header>
 
 <div class="search-box">
-    <label for="map-search"></label><input type="text" class="map-search" id="map-search" placeholder="Location Search..."/>
+    <label for="map-search"><input type="text" class="map-search" id="map-search" placeholder="Location Search..."/></label>
     <div  class="map-search-results" id="map-search-results"></div>
 </div>
 
@@ -43,11 +43,11 @@
 
 <div id="route-container">
     <div class="search-box" id="route-start-search-box">
-        <label for="route-start-search"></label><input type="text" class="map-search" id="route-start-search" placeholder="Route Start Search..."/>
+        <label for="route-start-search"><input type="text" class="map-search" id="route-start-search" placeholder="Route Start Search..."/></label>
         <div class="map-search-results"  id="route-start-results" ></div>
     </div>
     <div class="search-box" id="route-end-search-box">
-        <label for="route-end-search"></label><input type="text" class="map-search" id="route-end-search" placeholder="Route End Search..."/>
+        <label for="route-end-search"><input type="text" class="map-search" id="route-end-search" placeholder="Route End Search..."/></label>
         <div class="map-search-results" id="route-end-results"></div>
     </div>
     <button id="route-button"> <b> Calculate Route </b> </button>

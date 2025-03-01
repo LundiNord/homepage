@@ -126,7 +126,6 @@ function calcRoute() {
         return;
     }
     const routeSearchUrl = "https://api.mapbox.com/directions/v5/mapbox/";
-    //const routeProfile = "driving";
     const routeProfile = "walking";
     let url = `${routeSearchUrl}${routeProfile}/${startCoords[0]},${startCoords[1]};${endCoords[0]},${endCoords[1]}?alternatives=false&geometries=geojson&language=en&overview=simplified&steps=true&access_token=${mapboxToken}`;
     fetch(url)
@@ -145,10 +144,12 @@ function calcRoute() {
     umami.track("Route Calculated");
 }
 function showRoute(data) {
-    var layer = L.geoJSON(data.routes[0].geometry).addTo(bigMap);
+    const statsBox = document.getElementById('route-info');
+    statsBox.style.display = "block";
+    let layer = L.geoJSON(data.routes[0].geometry).addTo(bigMap);
     bigMap.fitBounds(layer.getBounds());
     const stats = document.getElementById('route-stats');
-   stats.innerHTML = 'Duration: ' + Math.round(data.routes[0].duration / 60) + ' min\n Distance: ' + Math.round(data.routes[0].distance / 1000) + ' km';
+    stats.innerHTML = 'Duration: ' + Math.round(data.routes[0].duration / 60) + ' min\n Distance: ' + Math.round(data.routes[0].distance / 1000) + ' km';
     const instructions = document.getElementById('route-instructions');
     const steps = data.routes[0].legs[0].steps;
     let tripInstructions = '';

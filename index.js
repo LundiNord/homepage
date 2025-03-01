@@ -20,7 +20,6 @@ async function changeLanguage() {
         langData = await fetchLanguageData('de');
         updateContent(langData);
         umami.track('Changed language to German');
-        //alert(language);
     }
 }
 changeLanguage();
@@ -36,7 +35,6 @@ export function toggleTheme() {
     updateButtonText(newTheme);
     umami.track('Theme switch');
 }
-//window.toggleTheme = toggleTheme; // Make the function globally accessible
 function detectSystemTheme() {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {

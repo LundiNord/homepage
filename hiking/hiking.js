@@ -52,7 +52,7 @@ export function getGPXLeafletMap(gpxTrack, day, containerID) {
     new L.GPX(gpxTrack, options, { //using https://github.com/mpetazzoni/leaflet-gpx
         async: true,
     }).on('loaded', function(e) {
-        var gpx = e.target;
+        let gpx = e.target;
         mapL.fitBounds(gpx.getBounds());
         const infoDiv = document.querySelector(`.info[data-day="${day}"]`);
         if (infoDiv) {

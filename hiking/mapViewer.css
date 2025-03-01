@@ -76,4 +76,5 @@ body {
 #route-info {
     border: 1px solid var(--border-color);
     padding: 2px;
+    display: none;
 }

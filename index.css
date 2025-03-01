@@ -86,5 +86,5 @@ p {
     z-index: 9000; /* Ensure it is always above other elements */
 }
 p.dashes {
-    margin-top: 3px;
+    margin-top: 4px;
 }
