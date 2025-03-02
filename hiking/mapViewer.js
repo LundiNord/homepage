@@ -1,4 +1,4 @@
-import {getStandardLeafletMap} from "./hiking.js";
+import {getStandardLeafletMap} from "./hiking.minified.js";
 
 //----------------------------- Map -----------------------------------
 const bigMap = getStandardLeafletMap("big-map");
