@@ -1,5 +1,5 @@
-
 //-----------------------------Leaflet Stuff-----------------------------------
+const maptilerKey="RgWztKV67Y0eRGFsVKdQ"
 
 //gpxTrack: gpx filepath; containerID: ID of the div where the map should be placed; day: day from the stats div
 export function getStandardLeafletMap(containerID) {
@@ -26,11 +26,29 @@ export function getStandardLeafletMap(containerID) {
     let Esri_WorldTopoMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'Tiles &copy; <a href="http://www.esri.com/">Esri</a> &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
     });
+    let MapTilerSatelite = L.tileLayer(`https://api.maptiler.com/maps/satellite/{z}/{x}/{y}@2x.jpg?key=${maptilerKey}`, {
+        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+    });
+    let MapTilerTopo = L.tileLayer(`https://api.maptiler.com/maps/outdoor-v2/{z}/{x}/{y}@2x.png?key=${maptilerKey}`, {
+        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+    });
+    let MapTilerTopoVector = L.maplibreGL({
+        style: `https://api.maptiler.com/maps/topo/style.json?key=${maptilerKey}`,
+        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+    });
+    let MapTilerSatVector = L.maplibreGL({
+        style: `https://api.maptiler.com/maps/satellite/style.json?key=${maptilerKey}`,
+        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+    });
     let baseMaps = {
         "OpenTopoMap": openTopo,
         //"Thunderforest Outdoors": thunderforest,
         "Esri Satellite": satelite,
-        "Esri Topo": Esri_WorldTopoMap
+        "Esri Topo": Esri_WorldTopoMap,
+        "MapTiler Satellite": MapTilerSatelite,
+        "MapTiler Topo": MapTilerTopo,
+        "MapTiler Satellite Vector": MapTilerSatVector,
+        "MapTiler Topo Vector": MapTilerTopoVector
     };
     let control = L.control.layers(baseMaps, null).addTo(mapL);
     L.control.scale({ imperial: false }).addTo(mapL);
