@@ -12,6 +12,7 @@ function addMarker(coordinates) {
 let curentLocation = null;
 bigMap.on('locationfound', function(ev){
     curentLocation = ev.latlng;
+    umami.track("Location found", {user_location: ev.latlng });
 })
 
 //----------------------------- Location Search -----------------------------------
