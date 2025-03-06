@@ -1,5 +1,5 @@
 //-----------------------------Leaflet Stuff-----------------------------------
-const maptilerKey="RgWztKV67Y0eRGFsVKdQ"
+const maptilerKey="RgWztKV67Y0eRGFsVKdQ";
 
 //gpxTrack: gpx filepath; containerID: ID of the div where the map should be placed; day: day from the stats div
 export function getStandardLeafletMap(containerID) {
@@ -48,7 +48,7 @@ export function getStandardLeafletMap(containerID) {
         "MapTiler Satellite": MapTilerSatelite,
         "MapTiler Topo": MapTilerTopo,
         "MapTiler Satellite Vector": MapTilerSatVector,
-        "MapTiler Topo Vector": MapTilerTopoVector
+        "MapTiler Topo Vector": MapTilerTopoVector,
     };
     let control = L.control.layers(baseMaps, null).addTo(mapL);
     L.control.scale({ imperial: false }).addTo(mapL);
