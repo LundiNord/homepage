@@ -88,3 +88,22 @@ p {
 p.dashes {
     margin-top: 4px;
 }
+
+#projects{
+    display: none;
+}
+@media (min-width: 70rem) {  /* Big Screens */
+    #projects {      /* Table of Contents stays on screen */
+        width: 200px;
+        margin-right: 20px;
+        position: fixed;
+        left: 20px;
+        top: 20px;
+        padding: 10px;
+        z-index: 1;
+        display: block;
+    }
+    #projects h2 {
+        font-size: 21px;
+    }
+}
