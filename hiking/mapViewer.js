@@ -22,6 +22,14 @@ search.addEventListener('keyup', function() {
     doLocationSearch(query, 0);
     umami.track("Location Search", {search_data: query });});
 const searchResults = document.getElementById('map-search-results');
+search.addEventListener('blur', function() {
+    searchResults.style.display = 'none';
+});
+search.addEventListener('focus', function() {
+    if (searchResults.innerHTML !== '') {
+        searchResults.style.display = 'block';
+    }
+});
 const searchApiUrl = 'https://api.mapbox.com/search/geocode/v6/forward';
 const mapboxToken = 'pk.eyJ1Ijoibnl4bm9yZCIsImEiOiJjbTdkZDZoeGswMXpkMmlzYjZzYnNuMGthIn0.bHJF97xa3uu3Vr4xj4tgWQ';
 
@@ -84,12 +92,28 @@ routeStart.addEventListener('keyup', function() {
     doLocationSearch(query, 1);
     umami.track("Route Start Search", {search_data: query });});
 const routeStartResults = document.getElementById('route-start-results');
+routeStart.addEventListener('blur', function() {
+    routeStartResults.style.display = 'none';
+});
+routeStart.addEventListener('focus', function() {
+    if (routeStartResults.innerHTML !== '') {
+        routeStartResults.style.display = 'block';
+    }
+});
 const routeEnd = document.getElementById('route-end-search');
 routeEnd.addEventListener('keyup', function() {
     const query = routeEnd.value;
     doLocationSearch(query, 2);
     umami.track("Route End Search", {search_data: query });});
 const routeEndResults = document.getElementById('route-end-results');
+routeEnd.addEventListener('blur', function() {
+    routeEndResults.style.display = 'none';
+});
+routeEnd.addEventListener('focus', function() {
+    if (routeEndResults.innerHTML !== '') {
+        routeEndResults.style.display = 'block';
+    }
+});
 const calcRouteButton = document.getElementById('route-button');
 calcRouteButton.addEventListener('click', calcRoute);
 

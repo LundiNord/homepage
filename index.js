@@ -74,6 +74,14 @@ try {
     search.addEventListener('keyup', function() {
         searchAndDisplay();
     });
+    search.addEventListener('blur', function() {
+        searchResults.style.display = 'none';
+    });
+    search.addEventListener('focus', function() {
+        if (searchResults.innerHTML !== '') {
+            searchResults.style.display = 'block';
+        }
+    });
 } catch {
     console.log('Search not available');}
 
