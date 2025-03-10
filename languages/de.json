@@ -13,5 +13,12 @@
   "about3" : "In meiner Freizeit gehe ich gerne <a href=\"hiking.html\">wandern</a>.",
   "description_hiking": "Wanderblog.",
   "title_hiking": "Wandern.",
-  "toc": "Inhaltsverzeichnis"
+  "toc": "Inhaltsverzeichnis",
+  "projects": "Projekte",
+  "hiking_blog": "Wanderblog",
+  "map_viewer": "Kartenbetrachter",
+  "map_viewer.": "Kartenbetrachter",
+  "search_engine": "Suchmaschine",
+  "open": "Öffnen",
+  "read_article": "Artikel lesen"
 }
