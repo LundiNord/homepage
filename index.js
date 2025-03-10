@@ -90,7 +90,7 @@ async function searchAndDisplay() {
         //remove duplicates
         results = results.filter((result, index, self) =>
                 index === self.findIndex((t) => (
-                    t.url === result.url
+                   t.text === result.text && t.url === result.url
                 ))
         );
         // Display results
@@ -154,18 +154,38 @@ async function recursiveSearch(node, input, page) {
     }
     if (textContent && textContent.toLowerCase().includes(input)) {
         let current = node;
-        while (current && !current.id) {        // Find a parent element with id
+        let found = false;
+        while (current && !current.id && !found) {        // Find a parent element with id
             if (current.parentNode === null) {  // Return root node
                 results.push({
                     id: "",
                     url: `${page}`,
                     text: textContent.trim()
                 });
+                found = true;
                 break;
             }
+            //check all items on the same level for id
+            let lastResult = null;
+            for (const sibling of current.parentNode.childNodes) {
+                if(sibling === current) {break;}
+                if (sibling.id) {
+                    lastResult = {
+                        id: sibling.id,
+                        url: `${page}#${sibling.id}`,
+                        text: textContent.trim()
+                    }
+                }
+            }
+            if (lastResult) {
+                results.push(lastResult);
+                found = true;
+                break;
+            }
+            //walk up the tree
             current = current.parentNode;
         }
-        if (current && current.id) {            // Node with id found
+        if (current && current.id && !found) {            // Node with id found
             results.push({
                 id: current.id,
                 url: `${page}#${current.id}`,
