@@ -74,8 +74,10 @@ try {
     search.addEventListener('keyup', function() {
         searchAndDisplay();
     });
-    search.addEventListener('blur', function() {
-        searchResults.style.display = 'none';
+    search.addEventListener('blur', function(event) {
+     if (!(event.relatedTarget && event.relatedTarget.nodeName === 'A')) {
+            searchResults.style.display = 'none';
+        }
     });
     search.addEventListener('focus', function() {
         if (searchResults.innerHTML !== '') {

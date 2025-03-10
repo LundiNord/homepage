@@ -22,8 +22,10 @@ search.addEventListener('keyup', function() {
     doLocationSearch(query, 0);
     umami.track("Location Search", {search_data: query });});
 const searchResults = document.getElementById('map-search-results');
-search.addEventListener('blur', function() {
-    searchResults.style.display = 'none';
+search.addEventListener('blur', function(event) {
+    if (!(event.relatedTarget && event.relatedTarget.nodeName === 'DIV')) {
+        searchResults.style.display = 'none';
+    }
 });
 search.addEventListener('focus', function() {
     if (searchResults.innerHTML !== '') {
@@ -31,7 +33,7 @@ search.addEventListener('focus', function() {
     }
 });
 const searchApiUrl = 'https://api.mapbox.com/search/geocode/v6/forward';
-const mapboxToken = 'pk.eyJ1Ijoibnl4bm9yZCIsImEiOiJjbTdkZDZoeGswMXpkMmlzYjZzYnNuMGthIn0.bHJF97xa3uu3Vr4xj4tgWQ';
+const mapboxToken = 'pk.eyJ1Ijoibnl4bm9yZCIsImEiOiJjbTdxbzFzMngweWxmMmpxdGw5aG51cmk2In0.9VZR8DhTyLYM4BhZXbIVGw';
 
 async function doLocationSearch(query, route) { //0 = no route, 1 = start, 2 = end
     if (query.length < 2) {
@@ -66,6 +68,7 @@ function showSearchResults(data) {
     searchResults.style.display = 'block';
     data.features.forEach(feature => {
         const resultItem = document.createElement('div');
+        resultItem.tabIndex = 0;
         resultItem.textContent = feature.properties.name + ', ' + feature.properties.full_address;
         resultItem.textContent = resultItem.textContent + "\n";
         resultItem.style.cursor = 'pointer';
@@ -92,8 +95,10 @@ routeStart.addEventListener('keyup', function() {
     doLocationSearch(query, 1);
     umami.track("Route Start Search", {search_data: query });});
 const routeStartResults = document.getElementById('route-start-results');
-routeStart.addEventListener('blur', function() {
-    routeStartResults.style.display = 'none';
+routeStart.addEventListener('blur', function(event) {
+    if (!(event.relatedTarget && event.relatedTarget.nodeName === 'DIV')) {
+        routeStartResults.style.display = 'none';
+    }
 });
 routeStart.addEventListener('focus', function() {
     if (routeStartResults.innerHTML !== '') {
@@ -106,8 +111,10 @@ routeEnd.addEventListener('keyup', function() {
     doLocationSearch(query, 2);
     umami.track("Route End Search", {search_data: query });});
 const routeEndResults = document.getElementById('route-end-results');
-routeEnd.addEventListener('blur', function() {
-    routeEndResults.style.display = 'none';
+routeEnd.addEventListener('blur', function(event) {
+    if (!(event.relatedTarget && event.relatedTarget.nodeName === 'DIV')) {
+        routeEndResults.style.display = 'none';
+    }
 });
 routeEnd.addEventListener('focus', function() {
     if (routeEndResults.innerHTML !== '') {
@@ -123,6 +130,7 @@ function showRoutePointSearch(data, start) {
     routeResults.style.display = 'block';
     data.features.forEach(feature => {
         const resultItem = document.createElement('div');
+        resultItem.tabIndex = 0;
         resultItem.textContent = feature.properties.name + ', ' + feature.properties.full_address;
         resultItem.textContent = resultItem.textContent + "\n";
         resultItem.style.cursor = 'pointer';
