@@ -33,7 +33,7 @@ search.addEventListener('focus', function() {
     }
 });
 const searchApiUrl = 'https://api.mapbox.com/search/geocode/v6/forward';
-const mapboxToken = 'pk.eyJ1Ijoibnl4bm9yZCIsImEiOiJjbTdxbzFzMngweWxmMmpxdGw5aG51cmk2In0.9VZR8DhTyLYM4BhZXbIVGw';
+const mapboxToken = 'pk.eyJ1Ijoibnl4bm9yZCIsImEiOiJjbTdkZDZoeGswMXpkMmlzYjZzYnNuMGthIn0.bHJF97xa3uu3Vr4xj4tgWQ';
 
 async function doLocationSearch(query, route) { //0 = no route, 1 = start, 2 = end
     if (query.length < 2) {
@@ -76,6 +76,7 @@ function showSearchResults(data) {
             const coordinates = feature.geometry.coordinates;
             bigMap.setView([coordinates[1], coordinates[0]], 15);
             addMarker([coordinates[1], coordinates[0]]);
+            searchResults.style.display = 'none'
         });
         searchResults.appendChild(resultItem);
         const separator = document.createElement('div');
@@ -135,6 +136,7 @@ function showRoutePointSearch(data, start) {
         resultItem.textContent = resultItem.textContent + "\n";
         resultItem.style.cursor = 'pointer';
         resultItem.addEventListener('click', () => {
+            routeResults.style.display = 'none';
             const coordinates = feature.geometry.coordinates;
             addMarker([coordinates[1], coordinates[0]]);
             routeResults.innerHTML = '';
