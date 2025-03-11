@@ -75,7 +75,7 @@ try {
         searchAndDisplay();
     });
     search.addEventListener('blur', function(event) {
-     if (!(event.relatedTarget && event.relatedTarget.nodeName === 'A')) {
+     if (!(event.relatedTarget && (event.relatedTarget.nodeName === 'A' || event.relatedTarget.nodeName === 'DIV'))) {
             searchResults.style.display = 'none';
         }
     });
@@ -83,6 +83,9 @@ try {
         if (searchResults.innerHTML !== '') {
             searchResults.style.display = 'block';
         }
+    });
+    searchResults.addEventListener('click', function() {
+        search.focus();
     });
 } catch {
     console.log('Search not available');}
@@ -114,10 +117,12 @@ async function searchAndDisplay() {
             if (i !== 0) {
                 const separator = document.createElement('div');
                 separator.innerHTML = `------------`;
+                separator.tabIndex = -1;
                 searchResults.appendChild(separator);
             }
             const resultElement = document.createElement('div');
-            resultElement.innerHTML = `<a href="${result.url}">${result.text}</a>`;
+            resultElement.innerHTML = `<a tabIndex = 0; href="${result.url}">${result.text}</a>`;
+            resultElement.tabIndex = 0;
             searchResults.appendChild(resultElement);
         }
     });
