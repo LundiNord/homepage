@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stats</title>
+    <meta name="description" content="Personal Webpage of Leon Bruns">
+    <meta name="keywords" content="Leon Bruns, Statistik">
+    <link id="css" rel="stylesheet" type="text/css" href="/index.css">
+    <link id="css2" rel="stylesheet" type="text/css" href="/stats.css">
+    <script src="/libs/chartJS/chart.js"></script>
+    <script src="/stats.js" type="module" ></script>
+    <script src="/index.minified.js" type="module" ></script>
+    <script defer src="https://analyse.nyxnord.de/script.js" data-website-id="a95c5f81-f3c3-4673-b356-ff7091def24b"></script>
+</head>
+
+<body>
+<header id="head">
+    <div class="header-right">
+        <a href="/index.html" class="privacy-link" data-lang="back">back</a>
+        |
+        <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark Mode</button>
+    </div>
+    <h1>Leon Bruns.</h1>
+    <div class="search-box">
+        <input type="text" id="search" placeholder="Search..."/>
+        <div id="search-results"></div>
+    </div>
+    <aside>Statistics from my life.</aside>
+</header>
+
+<main id="main">
+
+    <div class="metrix-div">
+        <h2>Air Quality in my Hometown</h2>
+        <canvas id="myChart"></canvas>
+    </div>
+    <div class="metrix-div">
+        <h2>My Local time</h2>
+        <p id="clock" style="font-size: 55px; text-align: center">Uhrzeit</p>
+    </div>
+    <div class="metrix-div">
+        <h2>Weather in my Hometown</h2>
+        <canvas id="weatherChart"></canvas>
+    </div>
+    <div class="metrix-div">
+        <h2>Weeks left until my death (approximate)</h2>
+        <p id="weeks_left" style="font-size: 55px; text-align: center">Weeks left</p>
+        <h2>Weeks already lived</h2>
+        <p id="weeks_lived" style="font-size: 55px; text-align: center">Weeks lived</p>
+    </div>
+
+
+
+
+    <br>
+</main>
+
+
+<footer id="footer">
+    <p> -------------------------------------------------- </p>
+    <p>
+        <a href="privacy.html" class="privacy-link" data-lang="privacy">Privacy</a>
+        |
+        <a href="https://github.com/LundiNord/homepage"
+           data-umami-event="outbound-link-click"
+           data-umami-event-url="https://github.com/LundiNord/homepage"
+        >Source</a>
+        |
+        <a href="https://status.leonbruns.de/"
+           data-umami-event="outbound-link-click"
+           data-umami-event-url="https://status.leonbruns.de/"
+        >Status</a>
+    </p>
+</footer>
+
+</body>
+</html>
