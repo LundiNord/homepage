@@ -9,8 +9,8 @@
     <link id="css" rel="stylesheet" type="text/css" href="/index.css">
     <link id="css2" rel="stylesheet" type="text/css" href="/stats.css">
     <script src="/libs/chartJS/chart.js"></script>
-    <script src="/stats.js" type="module" ></script>
-    <script src="/index.minified.js" type="module" ></script>
+    <script src="/stats.minified.js" type="module" ></script>
+    <script src="/index.minified.js" async type="module" ></script>
     <script defer src="https://analyse.nyxnord.de/script.js" data-website-id="a95c5f81-f3c3-4673-b356-ff7091def24b"></script>
 </head>
 
@@ -19,11 +19,11 @@
     <div class="header-right">
         <a href="/index.html" class="privacy-link" data-lang="back">back</a>
         |
-        <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark Mode</button>
+        <button class="theme-toggle">Toggle Dark Mode</button>
     </div>
     <h1>Leon Bruns.</h1>
     <div class="search-box">
-        <input type="text" id="search" placeholder="Search..."/>
+        <label for="search"></label><input type="text" id="search" placeholder="Search..."/>
         <div id="search-results"></div>
     </div>
     <aside>Statistics from my life.</aside>
@@ -49,6 +49,10 @@
         <h2>Weeks already lived</h2>
         <p id="weeks_lived" style="font-size: 55px; text-align: center">Weeks lived</p>
     </div>
+    <div class="metrix-div">
+        <h2>CO2 Levels since my birth</h2>
+        <canvas id="co2Chart"></canvas>
+    </div>
 
 
 
@@ -56,6 +60,20 @@
     <br>
 </main>
 
+<div id="popup">
+    <h1>Data Sources</h1>
+    <h2>Air Quality</h2>
+    <p>The air quality data is provided by <a href="https://www.lubw.baden-wuerttemberg.de/luft/messwerte-immissionswerte?id=DEBW080&comp=luft-pm25#karte" data-umami-event="outbound-link-click" data-umami-event-url="https://www.lubw.baden-wuerttemberg.de/luft/messwerte-immissionswerte?id=DEBW080&comp=luft-pm25#karte">Landesanstalt für Umwelt Baden-Württemberg</a>.</p>
+    <h2>Weather</h2>
+    <p>Weather data is provided by <a href="https://open-meteo.com/" data-umami-event="outbound-link-click" data-umami-event-url="https://open-meteo.com/">Open-Meteo.com</a>.</p>
+    <p>Zippenfenig, P. (2023). Open-Meteo.com Weather API [Computer software]. Zenodo. <a href="https://doi.org/10.5281/ZENODO.7970649" data-umami-event="outbound-link-click" data-umami-event-url="https://doi.org/10.5281/ZENODO.7970649">https://doi.org/10.5281/ZENODO.7970649</a></p>
+    <h2>CO2 Levels</h2>
+    <p>CO2 data is provided by <a href="https://gml.noaa.gov/ccgg/trends/global.html" data-umami-event="outbound-link-click" data-umami-event-url="https://gml.noaa.gov/ccgg/trends/global.html">NOAA</a>.</p>
+    <p>Lan, X., Tans, P. and K.W. Thoning: Trends in globally-averaged CO2 determined from NOAA Global Monitoring Laboratory measurements. Version Friday, 14-Mar-2025 11:33:44 MDT <a href="https://doi.org/10.15138/9N0H-ZH07" data-umami-event="outbound-link-click" data-umami-event-url="https://doi.org/10.15138/9N0H-ZH07">https://doi.org/10.15138/9N0H-ZH07</a></p>
+    <h2>German Yearly Average Temperature</h2>
+    <p>The german yearly average temperature data is provided by <a href="https://www.dwd.de/EN/ourservices/cdc/cdc_ueberblick-klimadaten_en.html" data-umami-event="outbound-link-click" data-umami-event-url="https://www.dwd.de/EN/ourservices/cdc/cdc_ueberblick-klimadaten_en.html">DWD</a>.</p>
+    <p>DWD Climate Data Center (CDC): Jährliche Gebietsmittel der Lufttemperatur (Jahresmittel) in °C (2 m Höhe), Version v19.3, abgerufen am 18.3.2024.</p>
+</div>
 
 <footer id="footer">
     <p> -------------------------------------------------- </p>
@@ -71,6 +89,8 @@
            data-umami-event="outbound-link-click"
            data-umami-event-url="https://status.leonbruns.de/"
         >Status</a>
+        |
+        <button class="popup-toggle">Data Sources</button>
     </p>
 </footer>
 
