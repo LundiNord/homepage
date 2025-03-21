@@ -498,11 +498,162 @@ async function displayCO2() {
 }
 displayCO2();
 
+//----------------------------- Inflation -----------------------------------
+//Data from https://www.destatis.de/ -> https://www-genesis.destatis.de/datenbank/online/statistic/61111/table/61111-0001/
+//Nominallohnindex: https://www.destatis.de/DE/Themen/Arbeit/Verdienste/Realloehne-Nettoverdienste/_inhalt.html#234822
+
+async function displayInflation() {
+    try {
+        const salaryData = [
+            { year: 2002, value: 0 },
+            { year: 2003, value: 0 },
+            { year: 2004, value: 0 },
+            { year: 2005, value: 0 },
+            { year: 2006, value: 0 },
+            { year: 2007, value: 0 },
+            { year: 2008, value: 0 },
+            { year: 2009, value: 0 },
+            { year: 2010, value: 0 },
+            { year: 2011, value: 0 },
+            { year: 2012, value: 0 },
+            { year: 2013, value: 0 },
+            { year: 2014, value: 2.7 },
+            { year: 2015, value: 2.8 },
+            { year: 2016, value: 2.3 },
+            { year: 2017, value: 2.5 },
+            { year: 2018, value: 3.1 },
+            { year: 2019, value: 2.6 },
+            { year: 2020, value: -0.7 },
+            { year: 2021, value: 3.1 },
+            { year: 2022, value: 2.6 },
+            { year: 2023, value: 6.0 },
+            { year: 2024, value: 5.4 }
+            ];
+        let data;
+        try {
+            const response = await fetch('https://www-genesis.destatis.de/genesisGONLINE/api/rest/tables/61111-0001/data');
+            data = await response.json();
+        } catch (error) {
+            console.error('Error fetching inflation data:', error);
+        }
+        const startIndex = 11;
+        let inflationData = data.data[0].value.slice(startIndex, startIndex + 34);
+        const salaryGraphData = salaryData.map(item => item.value);
+        let labels = Object.keys(data.data[0].dimension.JAHR.category.index).slice(startIndex, startIndex + 34);
+        const labels2 = salaryData.map(item => item.year);
+        const ctx = document.getElementById('inflationChart');
+        updateTheme();
+        const config = {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: '2020 = 100',
+                        data: inflationData,
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        tension: 0.1,
+                        pointRadius: 1,
+                        pointHoverRadius: 5,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Nominal wages',
+                        data: salaryGraphData,
+                        fill: false,
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        tension: 0.05,
+                        pointRadius: 1,
+                        pointHoverRadius: 5,
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: fontColor
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Time',
+                            color: fontColor
+                        },
+                        grid: {
+                            color: gridColor
+                        },
+                        ticks: {
+                            color: fontColor,
+                            maxRotation: 45,
+                            minRotation: 0
+                        }
+                    },
+                    y: {
+                        display: true,
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: '2020 = 100',
+                            color: fontColor
+                        },
+                        grid: {
+                            color: gridColor
+                        },
+                        ticks: {
+                            color: fontColor
+                        }
+                    },
+                    y1: {
+                        display: true,
+                        position: 'right',
+                        title: {
+                            display: true,
+                            text: '%',
+                            color: fontColor
+                        },
+                        grid: {
+                            drawOnChartArea: false,
+                            color: gridColor
+                        },
+                        ticks: {
+                            color: fontColor
+                        }
+                    }
+                }
+            }
+        };
+        if (window.inflationChartInstance) {
+            window.inflationChartInstance.destroy();
+        }
+        window.inflationChartInstance = new Chart(ctx, config);
+
+    } catch (error) {
+        console.error('Error fetching inflation data:', error);
+    }
+}
+displayInflation()
+
 //----------------------------- Helpers -----------------------------------
 document.querySelector(".theme-toggle").addEventListener("click", () => {
     setTimeout(() => {
         displayPM25Value();
         displayWeather();
         displayCO2();
+        displayInflation();
     }, 10);
 });

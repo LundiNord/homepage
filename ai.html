@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI</title>
+    <meta name="description" content="Personal Webpage of Leon Bruns">
+    <meta name="keywords" content="Leon Bruns">
+    <link id="css" rel="stylesheet" type="text/css" href="/index.css">
+    <link id="css2" rel="stylesheet" type="text/css" href="/ai.css">
+    <script src="/ai.minified.js" type="module" ></script>
+    <script src="/index.minified.js" async type="module" ></script>
+    <script defer src="https://analyse.nyxnord.de/script.js" data-website-id="a95c5f81-f3c3-4673-b356-ff7091def24b"></script>
+</head>
+
+<body>
+<header id="head">
+    <div class="header-right">
+        <a href="/index.html" class="privacy-link" data-lang="back">back</a>
+        |
+        <button class="theme-toggle">Toggle Dark Mode</button>
+    </div>
+    <h1>Leon Bruns.</h1>
+    <div class="search-box">
+        <label for="search"></label><input type="text" id="search" placeholder="Search..."/>
+        <div id="search-results"></div>
+    </div>
+    <aside>Local AI.</aside>
+</header>
+
+<main id="main">
+    <div class="chat-container">
+        <div id="chat-messages" class="chat-messages"></div>
+        <div id="settings">
+            <h1>Settings:</h1>
+            <h2>Model size:</h2>
+            <button id="model_small" class="settings_button">Small</button>
+            <button id="model_medium" class="settings_button">Medium</button>
+            <button id="model_big" class="settings_button">Big</button>
+            <p>
+                Small: 200MB; Medium: 400MB; Big: 1.4GB
+                Big will probably crash this website.
+                Models are cached in your browser.
+            </p>
+            <h2>Infos:</h2>
+            <p>
+                Using <a href="https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct" data-umami-event="outbound-link-click" data-umami-event-url="https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct"> SmolLM2</a>
+                Models and
+                <a href="https://github.com/huggingface/transformers.js" data-umami-event="outbound-link-click" data-umami-event-url="https://github.com/huggingface/transformers.js"> Transformer.js</a>.
+            </p>
+        </div>
+        <div class="chat-input-container">
+            <button id="settings-button">Settings</button>
+            <input id="ai_input" type="text" placeholder="Ask me anything..."/>
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+</main>
+
+<footer id="footer">
+    <p> -------------------------------------------------- </p>
+    <p>
+        <a href="privacy.html" class="privacy-link" data-lang="privacy">Privacy</a>
+        |
+        <a href="https://github.com/LundiNord/homepage"
+           data-umami-event="outbound-link-click"
+           data-umami-event-url="https://github.com/LundiNord/homepage"
+        >Source</a>
+        |
+        <a href="https://status.leonbruns.de/"
+           data-umami-event="outbound-link-click"
+           data-umami-event-url="https://status.leonbruns.de/"
+        >Status</a>
+    </p>
+</footer>
+
+</body>
+</html>

@@ -21,3 +21,5 @@ My personal homepage. Static Website built with pure HTML, CSS, and JS.
 - [Leaflet Locate](https://github.com/domoritz/leaflet-locatecontrol)
 - [MapLibre GL](https://github.com/maplibre/maplibre-gl-js) and [MapLibre GL Leaflet](https://github.com/maplibre/maplibre-gl-leaflet) for vector maps support.
 - Self-hosted [Umami](https://github.com/umami-software/umami) [![Better Stack Badge](https://uptime.betterstack.com/status-badges/v2/monitor/1ti8l.svg)](https://status.leonbruns.de) for tracking page views.
+- [ChartJS](https://github.com/chartjs/Chart.js) for easy and good-looking charts.
+- [Transformer.JS](https://github.com/huggingface/transformers.js/) and [SmolLM2](https://github.com/huggingface/smollm?tab=readme-ov-file#-smollm2-language-model) Models for some fun experiemnts with local AI.

@@ -136,7 +136,7 @@ async function searchAndDisplay() {
 const searchablePages = []  //Array of [document:HTML tree, page:String] pairs
 async function fetchPage() {
     const pages = ['/hiking/sweden2024.html', '/hiking/norwaySweden2023.html', '/hiking/mapViewer.html',
-        '/hiking.html', '/index.html', '/privacy.html', '/hiking/norway2021.html', '/stats.html','/myLife.html'];
+        '/hiking.html', '/index.html', '/privacy.html', '/hiking/norway2021.html', '/stats.html'];
     for (const page of pages) {
         try {
             const response = await fetch(page);
