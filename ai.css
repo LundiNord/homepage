@@ -44,9 +44,10 @@ html, body {
     padding: 0;
     height: 100%;
     width: 100%;
+    overflow: hidden;
 }
 body {
-    overflow-x: hidden;
+    /*overflow-x: hidden;*/
     min-width: 100%;
 }
 #main {
@@ -62,17 +63,17 @@ body {
     width: 90%;
     max-width: 800px;
     height: calc(100vh - 300px);
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border-color);
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    /*position: fixed;*/
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%, -50%);*/
+    margin: 15px auto 20px;
 }
 
 .chat-messages {
@@ -135,6 +136,7 @@ body {
     font-size: 16px;
     background-color: var(--background-color);
     color: var(--text-color);
+    width: 100%;
 }
 
 #send-button {
@@ -202,7 +204,7 @@ body {
 @media (max-width: 768px) {
     .chat-container {
         width: 95%;
-        height: calc(100vh - 250px);
+        height: calc(100vh - 260px);
         margin-top: 60px;
     }
     .chat-message {

@@ -1,6 +1,8 @@
 
 //----------------------------- Ai Worker -----------------------------------
 
+let modelLoading = false;
+let modelLoaded = false;
 const aiWorker = new Worker("ai_worker.minified.js", { type: "module" });
 aiWorker.onerror = function(event) {
     console.error(event);
@@ -18,27 +20,38 @@ aiWorker.addEventListener('message', event => {
         }
     } else if (topic === "loaded") {
         addMessage('assistant', 'Hello! How can I help you today?');
+        sendButton.style.background = "#0056b3";
+        modelLoading = false;
+        modelLoaded = true;
+    } else if (topic === "progress") {
+        if (Number.isNaN(message)) return;
+        currentResponseDiv.textContent = "Model " + message + "% loaded";
+    } else if (topic === "output_done") {
+        umami.track("Ai Output", {search_data: message});
+        isGenerating = false;
+        sendButton.style.background = "#0056b3";
+        sendButton.textContent = "Send";
     }
 });
 
 //----------------------------- In/Output -----------------------------------
 
 async function generateAnswer() {
-    if (isGenerating || !input.value.trim()) return;
+    if (isGenerating || !input.value.trim() || !modelLoaded) return;
     isGenerating = true;
+    sendButton.style.background = "gray";
+    sendButton.textContent = "Stop";
     const userMessage = input.value.trim();
     umami.track("Ai User Message", {message_data: userMessage});
     addMessage('user', userMessage);
     input.value = '';
     currentResponseDiv = addMessage('assistant', 'Thinking...');
     aiWorker.postMessage({ message: userMessage, topic: "input" });
-    setTimeout(() => {
-        isGenerating = false;
-    }, 500);
 }
 
 const input = document.getElementById('ai_input');
 const sendButton = document.getElementById('send-button');
+sendButton.style.background = "gray";
 const chatMessages = document.getElementById('chat-messages');
 const modelChangeButton = document.getElementById('settings-button');
 const popup = document.getElementById('settings');
@@ -69,7 +82,14 @@ input.addEventListener('keyup', function(event) {
     }
 });
 
-sendButton.addEventListener('click', generateAnswer);
+sendButton.addEventListener('click', () => {
+    if (isGenerating && modelLoaded) {
+        aiWorker.postMessage({ message: "", topic: "stop"});
+        sendButton.textContent = "Send";
+    } else {
+        generateAnswer();
+    }
+});
 
 modelChangeButton.addEventListener('click', () => {
     popup.style.display = popup.style.display === '' || popup.style.display === 'none' ? 'block' : 'none';
@@ -80,21 +100,27 @@ document.addEventListener('click', (event) => {
     }
 });
 document.getElementById('model_medium').addEventListener('click', (event) => {
-    aiWorker.postMessage({ message: "medium", topic: "model" });
-    addMessage('assistant', `Changing model to SmolLM2-360M-Instruct ...`);
+    if (modelLoading) return;
+    aiWorker.postMessage({ message: "medium", topic: "model"});
+    currentResponseDiv = addMessage('assistant', `Changing model to SmolLM2-360M-Instruct ...`);
     popup.style.display = 'none';
+    modelLoading = true;
     umami.track('Set Model', {model_data: 'medium'});
 })
 document.getElementById('model_small').addEventListener('click', (event) => {
-    aiWorker.postMessage({ message: "small", topic: "model" });
-    addMessage('assistant', `Changing model to SmolLM2-135M-Instruct ...`);
+    if (modelLoading) return;
+    aiWorker.postMessage({ message: "small", topic: "model"});
+    currentResponseDiv = addMessage('assistant', `Changing model to SmolLM2-135M-Instruct ...`);
     popup.style.display = 'none';
+    modelLoading = true;
     umami.track('Set Model', {model_data: 'small'});
 })
 document.getElementById('model_big').addEventListener('click', (event) => {
-    aiWorker.postMessage({ message: "big", topic: "model" });
-    addMessage('assistant', `Changing model to SmolLM2-1.7B-Instruct ...`);
+    if (modelLoading) return;
+    aiWorker.postMessage({ message: "big", topic: "model"});
+    currentResponseDiv = addMessage('assistant', `Changing model to SmolLM2-1.7B-Instruct ...`);
     popup.style.display = 'none';
+    modelLoading = true;
     umami.track('Set Model', {model_data: 'big'});
 })
 
