@@ -12,7 +12,6 @@ env.remoteHost= "https://data.nyxnord.de";
 env.backends.onnx.wasm.wasmPaths = '/libs/transformerjs/';
 let modelLoading = false;
 
-
 async function checkForWebGPU() {
     try {
         if (!navigator.gpu) {

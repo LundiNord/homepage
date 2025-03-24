@@ -1,6 +1,13 @@
 /**
  * original code from https://github.com/bryanbraun/your-life/tree/gh-pages
+    * modified by @LundiNord
  */
+:root {
+  --box-color: #000000;
+}
+[data-theme="dark"] {
+  --box-color: rgba(255, 255, 255, 0.34);
+}
 
 html {
   box-sizing: border-box;
@@ -30,24 +37,24 @@ body {
 .x-axis .markers,
 .y-axis .markers {
   font-size: 0.8rem;
-  color: black;
+  color: var(--text-color);
 }
 .weeks {
   max-width: 624px; /* 12px per week * 52weeks = 624px */
 }
 .weeks > li {
-  border: 1px solid black;
+  border: 1px solid var(--box-color);
   width: 1.282051282%; /* 8px/624px */
   padding-bottom: .961538462%; /* 6px/624px */
   margin: .320512821%; /* 2px/624px */
   float: left;
 }
 .weeks--x-label {
-  color: #000080;
+  color: var(--text-color);
   font-size: 1.25rem;
 }
 .weeks--y-label {
-  color: #000080;
+  color: var(--text-color);
   transform: rotate(-90deg);
   font-size: 1.25rem;
   position: absolute;
@@ -112,6 +119,17 @@ body {
   height: 1px; width: 1px;
   margin: -1px; padding: 0; border: 0;
 }
+
+[data-tooltip]:hover::after {
+  display: block;
+  position: absolute;
+  content: attr(data-tooltip);
+  border: 1px solid var(--border-color);
+  background: var(--background-color);
+  padding: .25em;
+  margin-top: 15px;
+}
+
 
 /**
  * Print Styles

@@ -11,6 +11,7 @@
   "about1" : "Hallo! Ich bin Leon Bruns, Student der Informatik am Karlsruher Institut für Technologie.",
   "about2" : "Ich interessiere mich für Sicherheit, Server und alles, was interessant klingt.",
   "about3" : "In meiner Freizeit gehe ich gerne <a href=\"hiking.html\">wandern</a>.",
+  "about4" : "Falls du mehr über mich erfahren willst, schau dir doch <a href=\"myLife.html\">mein Leben</a> in Boxen oder <a href=\"stats.html\">Statistiken</a> aus meinem Leben an.",
   "description_hiking": "Wanderblog.",
   "title_hiking": "Wandern.",
   "toc": "Inhaltsverzeichnis",
@@ -20,5 +21,18 @@
   "map_viewer.": "Kartenbetrachter",
   "search_engine": "Suchmaschine",
   "open": "Öffnen",
-  "read_article": "Artikel lesen"
+  "read_article": "Artikel lesen",
+  "myLife_desc": "Mein Leben in Boxen.",
+  "inspired-by": "Inspiriert von",
+  "stats": "Statistiken aus meinem Leben",
+  "stats_desc": "Statistiken aus meinem Leben.",
+  "data_sources" : "Datenquellen",
+  "local_time": "Meine lokale Zeit",
+  "air_quality": "Luftqualität in meiner Stadt",
+  "weather": "Wetter in meiner Stadt",
+  "weeks_left": "Verbleibende Wochen bis zu meinem Tod (ca.)",
+  "weeks_lived": "Bereits gelebte Wochen",
+  "climate_change": "Klimawandel seit meiner Geburt",
+  "inflation": "Inflation seit meiner Geburt",
+  "my_life" : "Mein Leben in Boxen"
 }
