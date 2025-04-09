@@ -123,6 +123,30 @@ document.getElementById('model_big').addEventListener('click', (event) => {
     modelLoading = true;
     umami.track('Set Model', {model_data: 'big'});
 })
+document.getElementById('model_gemma').addEventListener('click', (event) => {
+    if (modelLoading) return;
+    aiWorker.postMessage({ message: "gemma2-9b-it", topic: "model"});
+    currentResponseDiv = addMessage('assistant', `Changing model to gemma2-9b-it ...`);
+    popup.style.display = 'none';
+    modelLoading = true;
+    umami.track('Set Model', {model_data: 'gemma2-9b-it'});
+})
+document.getElementById('model_llama').addEventListener('click', (event) => {
+    if (modelLoading) return;
+    aiWorker.postMessage({ message: "llama-3.1-8b-instant", topic: "model"});
+    currentResponseDiv = addMessage('assistant', `Changing model to llama-3.1-8b-instant ...`);
+    popup.style.display = 'none';
+    modelLoading = true;
+    umami.track('Set Model', {model_data: 'llama-3.1-8b-instant'});
+})
+document.getElementById('model_deep').addEventListener('click', (event) => {
+    if (modelLoading) return;
+    aiWorker.postMessage({ message: "deepseek-r1-distill-llama-70b", topic: "model"});
+    currentResponseDiv = addMessage('assistant', `Changing model to deepseek-r1-distill-llama-70b ...`);
+    popup.style.display = 'none';
+    modelLoading = true;
+    umami.track('Set Model', {model_data: 'deepseek-r1-distill-llama-70b'});
+})
 
 // Show a welcome message when the page loads
 window.addEventListener('DOMContentLoaded', () => {

@@ -11,6 +11,7 @@ env.remoteHost= "https://data.nyxnord.de";
 // env.localModelPath = '/libs/transformerjs/models/';
 env.backends.onnx.wasm.wasmPaths = '/libs/transformerjs/';
 let modelLoading = false;
+let modelName;
 
 async function checkForWebGPU() {
     try {
@@ -36,12 +37,21 @@ async function loadModel(model = "medium") {
         //modelPath = "/libs/transformerjs/models/SmolLM2-360M-Instruct";
         //modelPath = "/libs/transformerjs/models/DeepSeek-R1-Distill-Qwen-1.5B-ONNX";
         modelPath = "models/SmolLM2-360M-Instruct"
+        modelName = "local";
     } else if (model === "small") {
         //modelPath = "/libs/transformerjs/models/SmolLM2-135M-Instruct";
         modelPath = "models/SmolLM2-135M-Instruct"
+        modelName = "local";
     } else if (model === "big") {
         //modelPath = "/libs/transformerjs/models/SmolLM2-1.7B-Instruct";
         modelPath = "models/SmolLM2-1.7B-Instruct"
+        modelName = "local";
+    } else if (model === "gemma2-9b-it" || model === "llama-3.1-8b-instant" || model === "deepseek-r1-distill-llama-70b") {
+        modelName = model;
+        return;
+    } else {
+        console.error("Unknown model name:", model);
+        return;
     }
     modelLoading = true;
     if (await checkForWebGPU()) {
@@ -90,11 +100,21 @@ let message = [
 let isGenerating = false;
 let stoppingCriteria = new InterruptableStoppingCriteria();
 async function generateAnswer(input) {
-    if (isGenerating || !input || !generator) return;
+    if (isGenerating || !input) return;
+    message.push({ role: "user", content: input });
+    if (modelName === "local") {
+        await generateLocalAnswer();
+    } else if (modelName === "gemma2-9b-it" || modelName === "llama-3.1-8b-instant" || modelName === "deepseek-r1-distill-llama-70b") {
+        await callGroqAPI(modelName);
+    }
+
+}
+
+async function generateLocalAnswer() {
+    if (!generator) return;
     isGenerating = true;
     let fullResponse = '';
     try {
-        message.push({ role: "user", content: input });
         const streamer = new TextStreamer(generator.tokenizer, {
             skip_prompt: true,
             callback_function: (text) => {
@@ -112,6 +132,63 @@ async function generateAnswer(input) {
         });
     } catch (error) {
         console.error("Error generating response:", error);
+    } finally {
+        isGenerating = false;
+        message.push({ role: "system", content: fullResponse });
+        postMessage({ message: fullResponse, topic: "output_done" });
+    }
+}
+
+//----------------------------- External Ai -----------------------------------
+//Using https://console.groq.com/
+const groqKey = "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";
+
+async function callGroqAPI(model = "gemma2-9b-it") {
+    isGenerating = true;
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${groqKey}`
+        },
+        body: JSON.stringify({
+            messages: message,
+            model: model,
+            temperature: 1,
+            max_completion_tokens: 500,
+            top_p: 1,
+            stream: true,
+            stop: null
+        })
+    });
+    if (!response.ok || !response.body) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+    }
+    const reader = response.body.getReader();
+    let fullResponse = '';
+    try {
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            const chunk = new TextDecoder().decode(value);
+            const lines = chunk.split('\n').filter(line => line.trim().startsWith('data: '));
+            for (const line of lines) {
+                const data = line.substring(6); // Remove 'data: ' prefix
+                if (data === '[DONE]') continue;
+                try {
+                    const parsed = JSON.parse(data);
+                    const content = parsed.choices[0]?.delta?.content || '';
+                    if (content) {
+                        fullResponse += content;
+                        postMessage({ message: fullResponse, topic: "output" });
+                    }
+                } catch (e) {
+                    console.error("Error parsing JSON:", e);
+                }
+            }
+        }
+    } catch (error) {
+        console.error("Stream reading error:", error);
     } finally {
         isGenerating = false;
         message.push({ role: "system", content: fullResponse });
