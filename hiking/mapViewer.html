@@ -44,7 +44,8 @@
 
 <div class="map-container"><div class="map" id="big-map"></div></div>
 
-<div id="route-container">
+<button type="button" class="collapsible" id="search-collapsible">Routing</button>
+<div id="route-container" class="collapsible-content">
     <div class="search-box" id="route-start-search-box">
         <label for="route-start-search" style="display: none">Route Start Search</label><input type="text" class="map-search" id="route-start-search" placeholder="Route Start Search..."/>
         <div class="map-search-results"  id="route-start-results" ></div>
@@ -53,11 +54,26 @@
         <label for="route-end-search" style="display: none">Route End Search</label><input type="text" class="map-search" id="route-end-search" placeholder="Route End Search..."/>
         <div class="map-search-results" id="route-end-results"></div>
     </div>
-    <button id="route-button"> <b> Calculate Route </b> </button>
+    <button id="route-button" class="div_button"> <b> Calculate Route </b> </button>
+
+    <button id="route-waypoint-button" class="div_button"> <b> Use last two waypoints </b> </button>
 
     <div id="route-info">
         <div id="route-stats"></div>
         <div id="route-instructions"></div>
+    </div>
+</div>
+<br>
+
+<button type="button" class="collapsible" id="gpx-collapsible">GPX</button>
+<div id="gpx-container" class="collapsible-content">
+    <div>
+        Upload GPX:
+        <input type="file" id="gpx-file-input" accept=".gpx" />
+    </div>
+<!--    <button id="show_gpx" class="div_button"> <b> Display GPX </b> </button>-->
+    <div id="gpx-info">
+        Distance: <span class="distance">0</span> km
     </div>
 </div>
 

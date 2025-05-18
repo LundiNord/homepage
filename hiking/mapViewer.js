@@ -204,3 +204,58 @@ function showRoute(data) {
     }
     instructions.innerHTML = `<ol>${tripInstructions}</ol>`;
 }
+
+document.getElementById("search-collapsible").addEventListener("click", function() {
+    this.classList.toggle("active");
+    let content = this.nextElementSibling;
+    if (content.style.display === "flex") {
+        content.style.display = "none";
+    } else {
+        content.style.display = "flex";
+    }
+});
+
+document.getElementById("route-waypoint-button").addEventListener("click", function() {
+    console.log("Not implemented yet");
+    //ToDo
+});
+
+//----------------------------- Custom GPX -----------------------------------
+
+document.getElementById("gpx-collapsible").addEventListener("click", function() {
+    this.classList.toggle("active");
+    let content = this.nextElementSibling;
+    if (content.style.display === "flex") {
+        content.style.display = "none";
+    } else {
+        content.style.display = "flex";
+    }
+});
+
+const options = {
+    async: true,
+    polyline_options: { color: 'red' },
+};
+document.getElementById("gpx-file-input").addEventListener("change", function() {
+    let uploadedFile = document.getElementById("gpx-file-input").files[0];
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        new L.GPX(e.target.result, {
+            async: true,
+            polyline_options: { color: 'red' }
+        }).on('loaded', function(e) {
+            let gpx = e.target;
+            bigMap.fitBounds(gpx.getBounds());
+            const infoDiv = document.getElementById("gpx-info");
+                infoDiv.querySelector(`.distance`).textContent = (gpx.get_distance() / 1000).toFixed(2);
+                infoDiv.querySelector(`.duration`).textContent = gpx.get_duration_string(gpx.get_moving_time());
+                infoDiv.querySelector(`.pace`).textContent = gpx.get_duration_string(gpx.get_moving_pace(), true);
+                // infoDiv.querySelector(`.elevation-gain`).textContent = gpx.get_elevation_gain().toFixed(0);
+                // infoDiv.querySelector(`.elevation-loss`).textContent = gpx.get_elevation_loss().toFixed(0);
+                // infoDiv.querySelector(`.elevation-net`).textContent = (gpx.get_elevation_gain() - gpx.get_elevation_loss()).toFixed(0);
+        }).addTo(bigMap);
+    };
+    reader.readAsText(uploadedFile);
+    umami.track("GPX Loaded");
+});
