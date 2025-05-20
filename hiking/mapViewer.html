@@ -10,12 +10,14 @@
     <link id="css2" rel="stylesheet" type="text/css" href="mapViewer.css">
     <link rel="stylesheet" href="../libs/leaflet/leaflet.css" />
     <link rel="stylesheet" href="../libs/leaflet-fullscreen/Control.FullScreen.css" />
+    <link rel="stylesheet" href="../libs/Leaflet.Measure/leaflet.measure.css" />
     <link rel="stylesheet" href="../libs/leaflet-locate/L.Control.Locate.min.css" />
     <script src="../libs/leaflet/leaflet.js"></script>
     <link rel="stylesheet" href="../libs/leaflet-fullscreen/Control.FullScreen.css" />
     <script src="../libs/leaflet-fullscreen/Control.FullScreen.js"></script>
     <script src="../libs/leaflet-gpx/gpx.min.js"></script>
     <script src="../libs/leaflet-locate/L.Control.Locate.min.js" charset="utf-8"></script>
+    <script src="../libs/Leaflet.Measure/leaflet.measure.minified.js"></script>
     <script src="../index.minified.js" type="module"></script>
     <link href="../libs/maplibre-gl/maplibre-gl.css" rel='stylesheet' />
     <script src="../libs/maplibre-gl/maplibre-gl.js"></script>
@@ -34,6 +36,8 @@
     </div>
     <h1 data-lang="map_viewer.">Map Viewer.</h1>
 </header>
+
+<main id="main">
 
 <div class="search-box">
     <label for="map-search" style="display: none">Map search</label><input type="text" class="map-search" id="map-search" placeholder="Location Search..."/>
@@ -65,26 +69,35 @@
 </div>
 <br>
 
-<button type="button" class="collapsible" id="gpx-collapsible">GPX</button>
+<button type="button" class="collapsible" id="gpx-collapsible">View GPX</button>
 <div id="gpx-container" class="collapsible-content">
-    <div>
-        Upload GPX:
-        <input type="file" id="gpx-file-input" accept=".gpx" />
-    </div>
-<!--    <button id="show_gpx" class="div_button"> <b> Display GPX </b> </button>-->
-    <div id="gpx-info">
-        Distance: <span class="distance">0</span> km
+
+    <div id="gpx_list">
+        <div>
+            Upload GPX:
+            <input type="file" class="" id="gpx-file-input" accept=".gpx" />
+        </div>
     </div>
 </div>
+<br>
 
+<button type="button" class="collapsible" id="waypoint-collapsible">Waypoints</button>
+<div id="waypoint-container" class="collapsible-content">
+
+    <button id="waypoint_add_button" class="div_button"> <b> Toggle Waypoint Mode </b> </button>
+    <div id="waypoint_list"> </div>
+</div>
+</main>
+
+<footer id="footer">
 <br> <br> <br> <br> <br>
 <p> -------------------------------------------------- </p>
 <p>
     <a href="../privacy.html" class="privacy-link" data-lang="privacy">Privacy</a>
     |
-    <a href="https://github.com/LundiNord/homepage"
+    <a href="https://github.com/LundiNord/homepage/blob/main/hiking/mapViewer.html"
        data-umami-event="outbound-link-click"
-       data-umami-event-url="https://github.com/LundiNord/homepage"
+       data-umami-event-url="https://github.com/LundiNord/homepage/blob/main/hiking/mapViewer.html"
     >Source</a>
     |
     <a href="https://status.leonbruns.de/"
@@ -92,6 +105,7 @@
        data-umami-event-url="https://status.leonbruns.de/"
     >Status</a>
 </p>
+</footer>
 
 </body>
 </html>

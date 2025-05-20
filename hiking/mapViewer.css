@@ -111,3 +111,12 @@ body {
     gap: 10px;
     align-items: start;
 }
+.gpx_list_item {
+    border: 1px solid var(--border-color);
+    padding: 5px;
+    margin-bottom: 5px;
+    min-width: 200px;
+}
+.gpx_list_item_button {
+    margin-right: 5px;
+}

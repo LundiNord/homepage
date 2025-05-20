@@ -10,7 +10,7 @@ paintWeeksWithDate("2022-11-19", new Date, "yellow", "Bachelor at KIT");
 
 paintWeeks("red", weeks_lived, weeks_lived, "now");
 paintWeekWithDate("2021-04-21", "red", "First Java Programm written");
-paintWeekWithDate("2002-07-01", "red", "My first week on this planet, Hooraay!");
+paintWeekWithDate("2002-07-01", "red", "My first week on this planet, Hooray!");
 
 //----------------------------- Helpers -----------------------------------
 

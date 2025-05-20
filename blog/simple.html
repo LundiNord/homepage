@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!-- SPDX-License-Identifier: MIT -->
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript">
+        // Relative URLs break if the main URL's last directory has no slash.
+        // Some web servers don't add that / as "Apache DirectorySlash" does.
+        if (!location.pathname.endsWith('/') && !location.pathname.endsWith('.html')) {
+            location.replace(location.pathname + '/' + location.search + location.hash);
+        }
+    </script>
+    <title>ZetaJS Demo: Simple Example</title>
+    <style>
+        /* Make the html body cover the entire (visual) viewport with no scroll bars. */
+        html, body { padding: 0; margin: 0; overflow:hidden; height: 100vh }
+    </style>
+</head>
+<body onselectstart="event.preventDefault()">
+<!-- onselectstart: Prevents accidently selecting / highlighting the canvas. -->
+<canvas
+        id="qtcanvas" contenteditable="true"
+        oncontextmenu="event.preventDefault()" onkeydown="event.preventDefault()"
+        style="height:100%; width:100%; border:0px none; padding:0;">
+    <!-- QT requires the canvas to have the ID "qtcanvas". -->
+    <!-- The canvas *must not* have any border or padding, or mouse coords will be wrong. -->
+    <!-- An outline is fine though. -->
+</canvas>
+<script type="text/javascript">
+    'use strict';
+
+    // IMPORTANT:
+    // Set base URL to the soffice.* files.
+    // Use an empty string if those files are in the same directory.
+    let soffice_base_url = 'https://cdn.zetaoffice.net/zetaoffice_latest/';
+    //let soffice_base_url = '';
+</script>
+<script src="config.js"></script> <!-- May fail. config.js is optional. -->
+<script type="text/javascript">
+
+    const canvas = document.getElementById('qtcanvas');
+    var Module = {
+        canvas,
+        uno_scripts: ['./zeta.js', './simple.js'],
+        locateFile: function(path, prefix) { return (prefix || soffice_base_url) + path; },
+    };
+    if (soffice_base_url !== '') {
+        // Must not be set when soffice.js is in the same directory.
+        Module.mainScriptUrlOrBlob = new Blob(
+            ["importScripts('"+soffice_base_url+"soffice.js');"], {type: 'text/javascript'});
+    }
+
+    // adjust window size
+    setInterval(function() { window.dispatchEvent(new Event('resize')); }, 1000);
+
+    const soffice_js = document.createElement("script");
+    soffice_js.src = soffice_base_url + "soffice.js";
+    console.log('Loading WASM binaries for ZetaJS from: ' + soffice_base_url);
+    // Hint: The global objects "canvas" and "Module" must exist before the next line.
+    document.body.appendChild(soffice_js);
+</script>
+</body>
+</html>

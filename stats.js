@@ -559,17 +559,17 @@ async function displayInflation() {
                         pointHoverRadius: 5,
                         yAxisID: 'y'
                     },
-                    {
-                        label: 'Nominal wages',
-                        data: salaryGraphData,
-                        fill: false,
-                        borderColor: 'rgb(255, 99, 132)',
-                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                        tension: 0.05,
-                        pointRadius: 1,
-                        pointHoverRadius: 5,
-                        yAxisID: 'y1'
-                    }
+                    // {
+                    //     label: 'Nominal wages',
+                    //     data: salaryGraphData,
+                    //     fill: false,
+                    //     borderColor: 'rgb(255, 99, 132)',
+                    //     backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    //     tension: 0.05,
+                    //     pointRadius: 1,
+                    //     pointHoverRadius: 5,
+                    //     yAxisID: 'y1'
+                    // }
                 ]
             },
             options: {
@@ -618,22 +618,22 @@ async function displayInflation() {
                             color: fontColor
                         }
                     },
-                    y1: {
-                        display: true,
-                        position: 'right',
-                        title: {
-                            display: true,
-                            text: '%',
-                            color: fontColor
-                        },
-                        grid: {
-                            drawOnChartArea: false,
-                            color: gridColor
-                        },
-                        ticks: {
-                            color: fontColor
-                        }
-                    }
+                    // y1: {
+                    //     display: true,
+                    //     position: 'right',
+                    //     title: {
+                    //         display: true,
+                    //         text: '%',
+                    //         color: fontColor
+                    //     },
+                    //     grid: {
+                    //         drawOnChartArea: false,
+                    //         color: gridColor
+                    //     },
+                    //     ticks: {
+                    //         color: fontColor
+                    //     }
+                    // }
                 }
             }
         };
