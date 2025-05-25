@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--suppress HtmlUnknownAnchorTarget -->
+<html lang="de">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,29 +8,84 @@
     <meta name="description" content="Hiking Blog of Leon Bruns">
     <meta name="keywords" content="Leon Bruns, Webpage, Blog, Hiking, Map, Satellite">
     <link id="css" rel="stylesheet" type="text/css" href="../index.css">
-<!--    <link id="css2" rel="stylesheet" type="text/css" href="mapViewer.css">-->
-
+    <link id="css2" rel="stylesheet" type="text/css" href="blog.css">
+    <script src="../index.minified.js" async type="module"></script>
     <script defer src="https://analyse.nyxnord.de/script.js" data-website-id="a95c5f81-f3c3-4673-b356-ff7091def24b"></script>
 </head>
 
 <body>
 <header>
     <div class="header-right">
-        <a href="../hiking.html" class="privacy-link" data-lang="back">back</a>
+        <a href="../index.html" class="privacy-link" data-lang="back">back</a>
         |
         <button class="theme-toggle">Dark Mode</button>
     </div>
-    <h1 data-lang="map_viewer.">Map Viewer.</h1>
+    <h1>RISCJ Blockits Minecraft Mod.</h1>
 </header>
 
+<nav class="toc">
+    <h2 data-lang="toc">Table of Contents</h2>
+    <ul>
+        <li><a href="#Overview">Übersicht</a></li>
+        <li><a href="#Pflichtenheft">Pflichtenheft</a></li>
+        <li><a href="#Entwurf">Entwurf</a></li>
+        <li><a href="#Implementierung">Implementierung</a></li>
+        <li><a href="#Qualitätsicherung">Qualitätsicherung</a></li>
+        <li><a href="#Abschluss">Abschluss Präsentation</a></li>
+        <li><a href="#Links">Links</a></li>
+    </ul>
+</nav>
 
+<main>
+    <h2 id="Overview">Übersicht</h2>
+    <p>
+        Im Rahmen eines Moduls an der Uni haben wir einen RISC-V Computer in Minecraft entwickelt.
+        Der Computer basiert auf einem programmierbaren RISC Instruction Set und kann programmiert werden, um verschiedene Aufgaben zu erfüllen.
+        Die Entwicklung umfasste die Erstellung eines Pflichtenhefts, eines Entwurfs, die Implementierung und die Qualitätssicherung.
+    </p>
 
-<!--<iframe src="https://1drv.ms/p/c/d60b2b86c817cff9/IQT5zxfIhisLIIDWmQEAAAAAAQRnAHWgLCMTAxKF9Yw1YPA" width="800" height="600" frameborder="0" scrolling="no"></iframe>-->
+    <h2 id="Pflichtenheft">Pflichtenheft</h2>
+    <embed class="embedded_pdf_slide" src="riscj/PflichtenheftPräsi.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf">
+    <embed class="embedded_pdf" src="riscj/Pflichtenheft_RISC_Simulator.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf">
 
-<iframe src="https://cloud.aurora.dedyn.io/s/Fe8Addatsp6HNTC" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+    <h2 id="Entwurf">Entwurf</h2>
+    <embed class="embedded_pdf_slide" src="riscj/EntwurfPräsi.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf">
+    <embed class="embedded_pdf" src="riscj/Entwurfsdokument_RISC_Simulator.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf">
 
+    <h2 id="Implementierung">Implementierung</h2>
+    <embed class="embedded_pdf" src="riscj/Implementierungsdokument_RISC_Simulator.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf">
 
-<br> <br> <br> <br> <br>
+    <h2 id="Qualitätsicherung">Qualitätsicherung</h2>
+    <embed class="embedded_pdf_slide" src="riscj/QualiPräsi.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf">
+    <embed class="embedded_pdf" src="riscj/Validierungsdokument_RISC_Simulator.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf">
+
+    <h2 id="Abschluss">Abschluss Präsentation</h2>
+    <iframe title="Abschluss Presentation" class="embedded_pdf_slide" src="https://1drv.ms/p/c/d60b2b86c817cff9/IQSZDzKlylfVTYx6qg8m-8DBAdTVZx8qY6WX2gCHFrNmkWU?em=2&amp;wdAr=1.7777777777777777&amp;wdEaaCheck=0"> </iframe>
+
+    <h2 id="Links">Links</h2>
+    Sample World: <a href="https://drive.proton.me/urls/4MRQC11WC4#CzBN6PZjvesZ"
+                     data-umami-event="outbound-link-click"
+                     data-umami-event-url="https://drive.proton.me/urls/4MRQC11WC4#CzBN6PZjvesZ"
+                    >Download</a>
+    <br>
+    GitHub Repository: <a href="https://github.com/RiscJ-blockits/riscj-computer-mod"
+                         data-umami-event="outbound-link-click"
+                         data-umami-event-url="https://github.com/RiscJ-blockits/riscj-computer-mod"
+                        >riscj-computer-mod</a>
+    <br>
+    CurseForge: <a href="https://www.curseforge.com/minecraft/mc-mods/riscj-computer"
+                         data-umami-event="outbound-link-click"
+                         data-umami-event-url="https://www.curseforge.com/minecraft/mc-mods/riscj-computer"
+                        >RISCJ Computer</a>
+    <br>
+    Modrinth: <a href="https://modrinth.com/mod/riscj-computer-mod"
+                         data-umami-event="outbound-link-click"
+                         data-umami-event-url="https://modrinth.com/mod/riscj-computer-mod"
+                        >RISCJ Computer Mod</a>
+</main>
+
+<footer>
+<br> <br>
 <p> -------------------------------------------------- </p>
 <p>
     <a href="../privacy.html" class="privacy-link" data-lang="privacy">Privacy</a>
@@ -44,6 +100,7 @@
        data-umami-event-url="https://status.leonbruns.de/"
     >Status</a>
 </p>
+</footer>
 
 </body>
 </html>

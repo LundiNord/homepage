@@ -1,0 +1,49 @@
+:root {
+    --border-color: #000000;
+}
+[data-theme="dark"] {
+    --border-color: #ffffff;
+}
+body {
+    max-width: 800px;
+}
+
+@media (min-width: 80rem) {  /* Big Screens */
+    .toc {      /* Table of Contents stays on screen */
+        width: 200px;
+        margin-right: 20px;
+        position: fixed;
+        left: 20px;
+        top: 20px;
+        padding: 10px;
+        z-index: 1;
+    }
+    .toc h2 {
+        font-size: 21px;
+    }
+}
+
+.embedded_pdf {
+    border: 2px solid var(--border-color);
+    width: 100%;
+    max-width: 100vw;
+    height: 60vh;
+    min-height: 300px;
+}
+.embedded_pdf_slide {
+    border: 2px solid var(--border-color);
+    width: 100%;
+    max-width: 100vw;
+    height: 35vh;
+    min-height: 180px;
+}
+@media (max-width: 600px) {
+    .embedded_pdf {
+        height: 45vh;
+        min-height: 180px;
+    }
+    .embedded_pdf_slide {
+        height: 28vh;
+        min-height: 100px;
+    }
+}

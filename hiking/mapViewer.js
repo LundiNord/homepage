@@ -293,15 +293,15 @@ async function restoreSession() {
     for (const [key, value] of Object.entries(localStorage)) {
        if (key.endsWith('.gpx')) {
            addGPXToList(value, key);
-        } else {
+       } else if (/^-?\d+(\.\d+)?,-?\d+(\.\d+)?$/.test(value.trim())) {
            try {
                const coords = value.split(",").map(Number);
-                if (coords.length !== 2 || isNaN(coords[0]) || isNaN(coords[1])) {
-                     throw new Error("Invalid coordinates");
-                }
+               if (coords.length !== 2 || isNaN(coords[0]) || isNaN(coords[1])) {
+                   throw new Error("Invalid coordinates");
+               }
                showWaypoint(key, coords);
            } catch (error) {
-                console.error(`Error parsing waypoint from localStorage key "${key}":`, error);
+               console.error(`Error parsing waypoint from localStorage key "${key}":`, error);
            }
        }
     }
