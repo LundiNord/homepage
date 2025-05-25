@@ -39,7 +39,7 @@ searchResults.addEventListener('click', function() {
     search.focus();
 });
 const searchApiUrl = 'https://api.mapbox.com/search/geocode/v6/forward';
-const mapboxToken = 'pk.eyJ1Ijoibnl4bm9yZCIsImEiOiJjbTdkZDZoeGswMXpkMmlzYjZzYnNuMGthIn0.bHJF97xa3uu3Vr4xj4tgWQ';
+const mapboxToken = 'pk.eyJ1Ijoibnl4bm9yZCIsImEiOiJjbTgza293dGUwa2w2Mm1zN3ZuZmVia3Q3In0.ZXcKcAtVGmyoReZWMIbraw';
 
 async function doLocationSearch(query, route) { //0 = no route, 1 = start, 2 = end
     if (query.length < 2) {
@@ -60,7 +60,7 @@ async function doLocationSearch(query, route) { //0 = no route, 1 = start, 2 = e
         })
         .then(data => {
             if(route === 1 || route === 2) {
-               showRoutePointSearch(data, route)
+               showRoutePointSearch(data, route, query)
             } else {
                 showSearchResults(data);
             }
@@ -138,10 +138,37 @@ routeEndResults.addEventListener('click', function() {
 const calcRouteButton = document.getElementById('route-button');
 calcRouteButton.addEventListener('click', calcRoute);
 
-function showRoutePointSearch(data, start) {
+function showRoutePointSearch(data, start, query) {
     let routeResults = start === 1 ? routeStartResults : routeEndResults;
     routeResults.innerHTML = '';
     routeResults.style.display = 'block';
+    wayPointList.forEach(waypoint => {
+       if (waypoint[2].toLowerCase().includes(query.toLowerCase())) {
+            const resultItem = document.createElement('div');
+            resultItem.textContent = "📍 " + waypoint[2];
+            resultItem.style.cursor = 'pointer';
+            resultItem.tabIndex = 0;
+            resultItem.addEventListener('click', () => {
+                routeResults.style.display = 'none';
+                const coordinates = waypoint[0]
+                const mapboxCoords = [coordinates[1], coordinates[0]];
+                addMarker([coordinates[1], coordinates[0]]);
+                routeResults.innerHTML = '';
+                routeResults.style.display = 'none';
+                if (start === 1) {
+                    startCoords = mapboxCoords;
+                    routeStart.value = waypoint[2];
+                } else {
+                    endCoords = mapboxCoords;
+                    routeEnd.value = waypoint[2];
+                }});
+            routeResults.appendChild(resultItem);
+            const separator = document.createElement('div');
+            separator.innerHTML = `------------`;
+            separator.tabIndex = -1;
+            routeResults.appendChild(separator);
+        }
+    });
     data.features.forEach(feature => {
         const resultItem = document.createElement('div');
         resultItem.tabIndex = 0;
@@ -192,11 +219,11 @@ function calcRoute() {
         });
     umami.track("Route Calculated");
 }
+let lastRoute = null;
 function showRoute(data) {
     const statsBox = document.getElementById('route-info');
     statsBox.style.display = "block";
-    let layer = L.geoJSON(data.routes[0].geometry).addTo(bigMap);
-    bigMap.fitBounds(layer.getBounds());
+    addGPXToList(getGpxFromCoordinateList(data.routes[0].geometry.coordinates), data.routes[0].legs[0].summary);
     const stats = document.getElementById('route-stats');
     stats.innerHTML = 'Duration: ' + Math.round(data.routes[0].duration / 60) + ' min\n Distance: ' + Math.round(data.routes[0].distance / 1000) + ' km';
     const instructions = document.getElementById('route-instructions');
@@ -222,6 +249,25 @@ document.getElementById("route-waypoint-button").addEventListener("click", funct
     console.log("Not implemented yet");
     //ToDo
 });
+
+function getGpxFromCoordinateList(coordinateList) {
+    //from geojson to gpx
+    let gpx = '<?xml version="1.0" encoding="UTF-8" standalone="no" ?>\n';
+    gpx += '<gpx version="1.1" creator="HikingMapViewer">\n';
+    gpx += '  <metadata>\n';
+    gpx += '    <name>Route</name>\n';
+    gpx += '  </metadata>\n';
+    gpx += '  <trk>\n';
+    gpx += '    <name>Route</name>\n';
+    gpx += '    <trkseg>\n';
+    for (const coordinate of coordinateList) {
+        gpx += `      <trkpt lat="${coordinate[1]}" lon="${coordinate[0]}"></trkpt>\n`;
+    }
+    gpx += '    </trkseg>\n';
+    gpx += '  </trk>\n';
+    gpx += '</gpx>';
+    return gpx;
+}
 
 //----------------------------- Custom GPX -----------------------------------
 
@@ -277,7 +323,7 @@ function addGPXToList(gpx, name) {
     infoDiv.innerHTML = "Distance: <span class=\"distance\"></span> km\n" +
                         "Duration: <span class=\"duration\"></span>\n" +
                         "Pace: <span class=\"pace\"></span>"
-    new L.GPX(gpx, {
+    const track = new L.GPX(gpx, {
         async: true,
         polyline_options: { color: colors[colorIndex] }
     }).on('loaded', function(e) {
@@ -287,8 +333,8 @@ function addGPXToList(gpx, name) {
         infoDiv.querySelector(`.duration`).textContent = gpxParsed.get_duration_string(gpxParsed.get_moving_time());
         infoDiv.querySelector(`.pace`).textContent = gpxParsed.get_duration_string(gpxParsed.get_moving_pace(), true);
     }).addTo(bigMap);
-    let gpx_div = document.createElement("div");
-    let heading = document.createElement("div");
+    const gpx_div = document.createElement("div");
+    const heading = document.createElement("div");
     heading.textContent = name;
     heading.addEventListener("click", function(e) {
        bigMap.fitBounds(gpxParsed.getBounds());
@@ -296,25 +342,35 @@ function addGPXToList(gpx, name) {
     infoDiv.addEventListener("click", function(e) {
         bigMap.fitBounds(gpxParsed.getBounds());
     })
-    let downloadButton = document.createElement("button");
+    const downloadButton = document.createElement("button");
     downloadButton.className = "gpx_list_item_button";
     downloadButton.textContent = "⤓";
     downloadButton.addEventListener("click", function() {
         download(name, gpx);
         umami.track("GPX Downloaded");
     });
-    let deleteButton = document.createElement("button");
+    const editButton = document.createElement("button");
+    editButton.className = "gpx_list_item_button";
+    editButton.textContent = "✏️";
+    editButton.addEventListener("click", function() {
+       bigMap.removeLayer(track);
+        gpxToPolyline(gpx);
+
+    });
+    const deleteButton = document.createElement("button");
     deleteButton.className = "gpx_list_item_button";
     deleteButton.textContent = "❌";
     deleteButton.addEventListener("click", function() {
         localStorage.removeItem(name);
         gpx_list.removeChild(gpx_div);
+        bigMap.removeLayer(track);
         umami.track("GPX Deleted");
     })
     gpx_div.className = "gpx_list_item";
     gpx_div.appendChild(heading);
     gpx_div.appendChild(infoDiv);
     gpx_div.appendChild(downloadButton);
+    gpx_div.appendChild(editButton);
     gpx_div.appendChild(deleteButton);
     gpx_div.id = name;
     gpx_list.appendChild(gpx_div);
@@ -348,13 +404,12 @@ document.getElementById("waypoint_add_button").addEventListener("click", functio
         waypointAddMode = true;
     }
 })
-
 function showWaypoint(name, coords) {
     if (!name) {
         name = coords;
     }
     const marker = addMarker(coords);
-    wayPointList.push(coords, marker, name);
+    wayPointList.push([coords, marker, name]);
     const waypoint_div = document.createElement("div");
     const heading = document.createElement("div");
     heading.textContent = name;
@@ -374,8 +429,11 @@ function showWaypoint(name, coords) {
                 localStorage.removeItem(heading.textContent);
                 heading.textContent = input.value;
                 localStorage.setItem(heading.textContent, coords);
-                //wayPointList[wayPointList.indexOf(coords)] =
                 waypoint_div.replaceChild(heading, input);
+                const index = wayPointList.findIndex(waypoint => waypoint[0][0] === coords[0] && waypoint[0][1] === coords[1]);
+                if (index !== -1) {
+                    wayPointList[index][2] = input.value;
+                }
             }
         })
         waypoint_div.replaceChild(input, heading);
@@ -386,9 +444,9 @@ function showWaypoint(name, coords) {
     deleteButton.addEventListener("click", function() {
         bigMap.removeLayer(marker);
         // Remove the waypoint from wayPointList
-        const index = wayPointList.indexOf(coords);
+        const index = wayPointList.findIndex(waypoint => waypoint[0][0] === coords[0] && waypoint[0][1] === coords[1]);
         if (index !== -1) {
-            wayPointList.splice(index, 2); // Remove both the coords and marker
+            wayPointList.splice(index, 1); // Remove the waypoint entry
         }
         document.getElementById("waypoint_list").removeChild(waypoint_div);
         localStorage.removeItem(heading.textContent);
@@ -403,4 +461,21 @@ function showWaypoint(name, coords) {
 }
 
 
+function gpxToPolyline(gpx) {
+    // Parse GPX data to extract track points
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(gpx, "text/xml");
+    const trackPoints = xmlDoc.getElementsByTagName("trkpt");
+    // Convert track points to polyline coordinates
+    const coordinates = [];
+    for (const element of trackPoints) {
+        const lat = parseFloat(element.getAttribute("lat"));
+        const lon = parseFloat(element.getAttribute("lon"));
+        coordinates.push([lat, lon]);
+    }
+    // Create and return the polyline
+    console.log(bigMap.editTools);
+    const polyline = L.polyline(coordinates, {color: colors[colorIndex]}).addTo(bigMap);
 
+    polyline.enableEdit();
+}

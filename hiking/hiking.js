@@ -1,13 +1,14 @@
 //-----------------------------Leaflet Stuff-----------------------------------
 const maptilerKey="RgWztKV67Y0eRGFsVKdQ";
 
-//gpxTrack: gpx filepath; containerID: ID of the div where the map should be placed; day: day from the stats div
+//gpxTrack: gpx filepath; containerID: ID of the div where the map should be placed
 export function getStandardLeafletMap(containerID) {
     let mapL = L.map(containerID, {
         fullscreenControl: true,
         fullscreenControlOptions: {
             position: 'topleft'
-        }
+        },
+        editable: true
     });
     //L.tileLayer('https://b.tile.opentopomap.org/{z}/{x}/{y}.png', {
     let openTopo = L.tileLayer('https://tile.nyxnord.de/{z}/{x}/{y}.png', {
