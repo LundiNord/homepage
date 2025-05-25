@@ -2,13 +2,14 @@
 const maptilerKey="RgWztKV67Y0eRGFsVKdQ";
 const mapyKey = 'rccMtaCSe-oceaqh2GUTvxdpvqUZcFlNYyR8wrJAsh0';  //https://developer.mapy.cz/account/projects
 
-//gpxTrack: gpx filepath; containerID: ID of the div where the map should be placed; day: day from the stats div
+//gpxTrack: gpx filepath; containerID: ID of the div where the map should be placed
 export function getStandardLeafletMap(containerID) {
     const mapL = L.map(containerID, {
         fullscreenControl: true,
         fullscreenControlOptions: {
             position: 'topleft'
-        }
+        },
+        editable: true
     });
     //L.tileLayer('https://b.tile.opentopomap.org/{z}/{x}/{y}.png', {
     const openTopo = L.tileLayer('https://tile.nyxnord.de/{z}/{x}/{y}.png', {
