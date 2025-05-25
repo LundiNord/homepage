@@ -47,3 +47,9 @@ body {
         min-height: 100px;
     }
 }
+
+.präsi_consent {
+    margin-bottom:1em;
+    border: 2px solid var(--border-color);
+    padding: 0.5em;
+}

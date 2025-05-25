@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title data-lang="title_hiking">Hiking.</title>
-    <meta name="description" content="Hiking Blog of Leon Bruns">
-    <meta name="keywords" content="Leon Bruns, Webpage, Blog, Hiking, Map, Satellite">
+    <title>RISCJ Blockits Minecraft Mod.</title>
+    <meta name="description" content="Blog of Leon Bruns">
+    <meta name="keywords" content="Leon Bruns, Webpage, Blog, Minecraft, RISC-V, RISCJ, Mod, Computer, Modding">
     <link id="css" rel="stylesheet" type="text/css" href="../index.css">
     <link id="css2" rel="stylesheet" type="text/css" href="blog.css">
     <script src="../index.minified.js" async type="module"></script>
@@ -16,11 +16,19 @@
 <body>
 <header>
     <div class="header-right">
-        <a href="../index.html" class="privacy-link" data-lang="back">back</a>
+        <a href="blog.html" class="privacy-link" data-lang="back">back</a>
         |
         <button class="theme-toggle">Dark Mode</button>
     </div>
-    <h1>RISCJ Blockits Minecraft Mod.</h1>
+    <h1>Blog.</h1>
+    <div class="search-box">
+        <label for="search" style="display: none">Search</label><input type="text" id="search" placeholder="Search..."/>
+        <div id="search-results"></div>
+    </div>
+    <aside>RISCJ Blockits Minecraft Mod.</aside>
+    <p class="dashes">
+        --------------------------------------------------
+    </p>
 </header>
 
 <nav class="toc">
@@ -60,7 +68,24 @@
     <embed class="embedded_pdf" src="riscj/Validierungsdokument_RISC_Simulator.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf">
 
     <h2 id="Abschluss">Abschluss Präsentation</h2>
-    <iframe title="Abschluss Presentation" class="embedded_pdf_slide" src="https://1drv.ms/p/c/d60b2b86c817cff9/IQSZDzKlylfVTYx6qg8m-8DBAdTVZx8qY6WX2gCHFrNmkWU?em=2&amp;wdAr=1.7777777777777777&amp;wdEaaCheck=0"> </iframe>
+    <div id="presentation-consent" class="präsi_consent">
+        <p>This embedded presentation is loaded from an external site (Microsoft OneDrive). Do you want to load it?</p>
+        <p>Their <a href="https://www.microsoft.com/en-gb/privacy/privacystatement"> Privacy Policy </a>applies</p>
+        <button id="load-presentation">Load Presentation</button>
+        <p>Download instead: <a href="https://drive.proton.me/urls/03SZWY82DC#8xWAml0kRwtR">Link</a></p>
+    </div>
+    <script>
+        document.getElementById('load-presentation').onclick = function() {
+            const consentDiv = document.getElementById('presentation-consent');
+            const iframe = document.createElement('iframe');
+            iframe.title = "Abschluss Presentation";
+            iframe.className = "embedded_pdf_slide";
+            iframe.src = "https://1drv.ms/p/c/d60b2b86c817cff9/IQSZDzKlylfVTYx6qg8m-8DBAdTVZx8qY6WX2gCHFrNmkWU?em=2&wdAr=1.7777777777777777&wdEaaCheck=0";
+            consentDiv.parentNode.replaceChild(iframe, consentDiv);
+            umami.track("PPP loaded");
+        };
+    </script>
+
 
     <h2 id="Links">Links</h2>
     Sample World: <a href="https://drive.proton.me/urls/4MRQC11WC4#CzBN6PZjvesZ"
