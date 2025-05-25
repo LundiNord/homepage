@@ -120,3 +120,15 @@ body {
 .gpx_list_item_button {
     margin-right: 5px;
 }
+#gpx_create_button {
+    margin-bottom: 5px;
+}
+[data-tooltip]:hover::after {
+    display: block;
+    position: absolute;
+    content: attr(data-tooltip);
+    border: 1px solid var(--border-color);
+    background: white;
+    padding: .25em;
+    margin-top: 15px;
+}

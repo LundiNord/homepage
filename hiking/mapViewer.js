@@ -245,11 +245,6 @@ document.getElementById("search-collapsible").addEventListener("click", function
     }
 });
 
-document.getElementById("route-waypoint-button").addEventListener("click", function() {
-    console.log("Not implemented yet");
-    //ToDo
-});
-
 function getGpxFromCoordinateList(coordinateList) {
     //from geojson to gpx
     let gpx = '<?xml version="1.0" encoding="UTF-8" standalone="no" ?>\n';
@@ -291,7 +286,7 @@ document.getElementById("waypoint-collapsible").addEventListener("click", functi
     }
 });
 const gpx_list = document.getElementById("gpx_list");
-const colors = ['red', 'blue', 'green', 'purple', 'orange', 'darkred', 'lightred', 'darkblue', 'darkgreen', 'pink', 'lightblue', 'lightgreen', 'gray', 'black'];
+const colors = ['red', 'blue', 'green', 'purple', 'orange', 'darkred', 'lightred', 'darkblue', 'darkgreen', 'pink', 'lightblue', 'lightgreen', 'gray'];
 let colorIndex = 0;
 restoreSession();
 async function restoreSession() {
@@ -299,13 +294,20 @@ async function restoreSession() {
        if (key.endsWith('.gpx')) {
            addGPXToList(value, key);
         } else {
-           const coords = value.split(",").map(Number);
-           showWaypoint(key, coords);
+           try {
+               const coords = value.split(",").map(Number);
+                if (coords.length !== 2 || isNaN(coords[0]) || isNaN(coords[1])) {
+                     throw new Error("Invalid coordinates");
+                }
+               showWaypoint(key, coords);
+           } catch (error) {
+                console.error(`Error parsing waypoint from localStorage key "${key}":`, error);
+           }
        }
     }
 }
 document.getElementById("gpx-file-input").addEventListener("change", function() {
-    let uploadedFile = document.getElementById("gpx-file-input").files[0];
+    const uploadedFile = document.getElementById("gpx-file-input").files[0];
     const reader = new FileReader();
     reader.onload = function(e) {
         if (localStorage.hasOwnProperty(uploadedFile.name)) {
@@ -336,6 +338,7 @@ function addGPXToList(gpx, name) {
     const gpx_div = document.createElement("div");
     const heading = document.createElement("div");
     heading.textContent = name;
+    heading.style.color = colors[colorIndex];
     heading.addEventListener("click", function(e) {
        bigMap.fitBounds(gpxParsed.getBounds());
     });
@@ -345,6 +348,7 @@ function addGPXToList(gpx, name) {
     const downloadButton = document.createElement("button");
     downloadButton.className = "gpx_list_item_button";
     downloadButton.textContent = "⤓";
+    downloadButton.setAttribute("data-tooltip", "Download GPX");
     downloadButton.addEventListener("click", function() {
         download(name, gpx);
         umami.track("GPX Downloaded");
@@ -352,14 +356,32 @@ function addGPXToList(gpx, name) {
     const editButton = document.createElement("button");
     editButton.className = "gpx_list_item_button";
     editButton.textContent = "✏️";
+    editButton.setAttribute("data-tooltip", "Edit Line");
+    let editing = false;
+    let polyline = null;
     editButton.addEventListener("click", function() {
-       bigMap.removeLayer(track);
-        gpxToPolyline(gpx);
-
+        if (!editing) {
+            bigMap.removeLayer(track);
+            polyline = gpxToPolyline(gpx);
+            editing = true;
+            editButton.textContent = "💾";
+        } else {
+            editing = false;
+            editButton.textContent = "✏️";
+            bigMap.removeLayer(polyline);
+            localStorage.removeItem(name);
+            gpx_list.removeChild(gpx_div);
+            const newGPX = polylineToGpx(polyline);
+            localStorage.setItem(name, newGPX);
+            addGPXToList(newGPX, name);
+            polyline = null;
+        }
     });
+    //ToDo: add rename button
     const deleteButton = document.createElement("button");
     deleteButton.className = "gpx_list_item_button";
     deleteButton.textContent = "❌";
+    deleteButton.setAttribute("data-tooltip", "Delete GPX");
     deleteButton.addEventListener("click", function() {
         localStorage.removeItem(name);
         gpx_list.removeChild(gpx_div);
@@ -419,31 +441,44 @@ function showWaypoint(name, coords) {
     const renameButton = document.createElement("button");
     renameButton.className = "gpx_list_item_button";
     renameButton.textContent = "✏️";
+    renameButton.setAttribute("data-tooltip", "Rename Waypoint");
+    let renaming = false;
     renameButton.addEventListener("click", function() {
         const input = document.createElement("input");
-        input.value = heading.textContent;
-        input.type = "text";
-        input.accept = "text/plain;charset=utf-8";
-        input.addEventListener("keydown", function(e) {
-            if (e.key === "Enter") {
-                localStorage.removeItem(heading.textContent);
-                heading.textContent = input.value;
-                localStorage.setItem(heading.textContent, coords);
-                waypoint_div.replaceChild(heading, input);
-                const index = wayPointList.findIndex(waypoint => waypoint[0][0] === coords[0] && waypoint[0][1] === coords[1]);
-                if (index !== -1) {
-                    wayPointList[index][2] = input.value;
+        if (!renaming) {
+            renaming = true;
+            renameButton.textContent = "💾";
+            input.value = heading.textContent;
+            input.type = "text";
+            input.accept = "text/plain;charset=utf-8";
+            input.addEventListener("keydown", function(e) {
+                if (e.key === "Enter") {
+                    localStorage.removeItem(heading.textContent);
+                    heading.textContent = input.value;
+                    localStorage.setItem(heading.textContent, coords);
+                    waypoint_div.replaceChild(heading, input);
+                    const index = wayPointList.findIndex(waypoint => waypoint[0][0] === coords[0] && waypoint[0][1] === coords[1]);
+                    if (index !== -1) {
+                        wayPointList[index][2] = input.value;
+                    }
+                    renameButton.textContent = "✏️";
+                    renaming = false;
                 }
-            }
-        })
-        waypoint_div.replaceChild(input, heading);
+            })
+            waypoint_div.replaceChild(input, heading);
+            renameButton._input = input;
+        } else {
+            const event = new KeyboardEvent("keydown", { key: "Enter" });
+            renameButton._input.dispatchEvent(event);
+        }
     });
     const deleteButton = document.createElement("button");
     deleteButton.className = "gpx_list_item_button";
     deleteButton.textContent = "❌";
+    deleteButton.setAttribute("data-tooltip", "Delete Waypoint");
     deleteButton.addEventListener("click", function() {
         bigMap.removeLayer(marker);
-        // Remove the waypoint from wayPointList
+        // Remove the waypoint from the wayPointList
         const index = wayPointList.findIndex(waypoint => waypoint[0][0] === coords[0] && waypoint[0][1] === coords[1]);
         if (index !== -1) {
             wayPointList.splice(index, 1); // Remove the waypoint entry
@@ -459,8 +494,6 @@ function showWaypoint(name, coords) {
     waypoint_div.id = coords;
     document.getElementById("waypoint_list").appendChild(waypoint_div);
 }
-
-
 function gpxToPolyline(gpx) {
     // Parse GPX data to extract track points
     const parser = new DOMParser();
@@ -473,9 +506,24 @@ function gpxToPolyline(gpx) {
         const lon = parseFloat(element.getAttribute("lon"));
         coordinates.push([lat, lon]);
     }
-    // Create and return the polyline
-    console.log(bigMap.editTools);
     const polyline = L.polyline(coordinates, {color: colors[colorIndex]}).addTo(bigMap);
-
     polyline.enableEdit();
+    return polyline;
 }
+function polylineToGpx(polyline) {
+    // Convert Leaflet polyline to GPX string
+    const latlngs = polyline.getLatLngs();
+    const coordinates = latlngs.map(latlng => [latlng.lng, latlng.lat]);
+    return getGpxFromCoordinateList(coordinates);
+}
+document.getElementById("gpx_create_button").addEventListener("click", function() {
+    const name = "New GPX " + new Date().toISOString().split(".")[0] + ".gpx";
+    const center = bigMap.getCenter();
+    const polyline = L.polyline([
+    [center.lat, center.lng],
+    [center.lat + 0.00045, center.lng] // ~50 meters north
+    ]);
+    const gpx = polylineToGpx(polyline);
+    localStorage.setItem(name, gpx);
+    addGPXToList(gpx, name);
+});
