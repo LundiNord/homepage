@@ -14,7 +14,7 @@ My personal homepage. Static Website built with pure HTML, CSS, and JS.
 
 ## Used Libraries/Resources
 
-- [Leaflet](https://github.com/Leaflet/Leaflet) to embedd maps. 
+- [Leaflet](https://github.com/Leaflet/Leaflet) to embed maps. 
 - Map tiles are served from a self-hosted [OpenTopo-Maps](https://opentopomap.org/about) cache [![Better Stack Badge](https://uptime.betterstack.com/status-badges/v2/monitor/1t3sb.svg)](https://status.leonbruns.de). See [nginx config](https://gist.github.com/LundiNord/689042bc69a496dafc2a4440ce05cbfa).
 - [Leaflet Fullscreen](https://github.com/brunob/leaflet.fullscreen)
 - [Leaflet GPX](https://github.com/mpetazzoni/leaflet-gpx) for parsing and displaying gpx tracks.
@@ -22,4 +22,7 @@ My personal homepage. Static Website built with pure HTML, CSS, and JS.
 - [MapLibre GL](https://github.com/maplibre/maplibre-gl-js) and [MapLibre GL Leaflet](https://github.com/maplibre/maplibre-gl-leaflet) for vector maps support.
 - Self-hosted [Umami](https://github.com/umami-software/umami) [![Better Stack Badge](https://uptime.betterstack.com/status-badges/v2/monitor/1ti8l.svg)](https://status.leonbruns.de) for tracking page views.
 - [ChartJS](https://github.com/chartjs/Chart.js) for easy and good-looking charts.
-- [Transformer.JS](https://github.com/huggingface/transformers.js/) and [SmolLM2](https://github.com/huggingface/smollm?tab=readme-ov-file#-smollm2-language-model) Models for some fun experiemnts with local AI.
+- [Transformer.JS](https://github.com/huggingface/transformers.js/) and [SmolLM2](https://github.com/huggingface/smollm?tab=readme-ov-file#-smollm2-language-model) Models for some fun experiments with local AI.
+- [Leaflet.Measure](https://github.com/ptma/leaflet.measure) to measure distances and areas on a map.
+- [Leaflet.Editable](https://github.com/Leaflet/Leaflet.Editable) to edit lines.
+- [PDF.js](https://mozilla.github.io/pdf.js/) to reliably display PDFs in all browsers.
