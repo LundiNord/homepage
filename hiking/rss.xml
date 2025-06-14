@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Blog of Leon Bruns</title>
+        <link>https://leonbruns.de/blog/blog.html</link>
+        <description>Blog.</description>
+        <atom:link href="https://leonbruns.de/hiking/rss.xml" rel="self" type="application/rss+xml" />
+        <item>
+            <title>North Sweden 2024</title>
+            <link>https://leonbruns.de/hiking/sweden2024.html</link>
+            <guid>https://leonbruns.de/hiking/sweden2024.html</guid>
+            <pubDate>30 Sep 2024 00:00:00 GMT</pubDate>
+            <description>Nikkaluokta - Abisko</description>
+        </item>
+        <item>
+            <title>Norway 2021 Solo</title>
+            <link>https://leonbruns.de/hiking/norway2021.html</link>
+            <guid>https://leonbruns.de/hiking/norway2021.html</guid>
+            <pubDate>26 Sep 2021 00:00:00 GMT</pubDate>
+            <description>Haugastøl - Haugastøl</description>
+        </item>
+    </channel>
+</rss>
