@@ -35,7 +35,7 @@ function getGPXLeafletMap(gpxTrack, containerID, infoDivID) {
         // Slope chart profile: true || "summary" || "disabled" || false
         slope: false,
         // Speed chart profile: true || "summary" || "disabled" || false
-        speed: "disabled",
+        speed: false,
         // Altitude chart profile: true || "summary" || "disabled" || false
         altitude: true,
         // Display time info: true || "summary" || false
@@ -82,23 +82,21 @@ function getGPXLeafletMap(gpxTrack, containerID, infoDivID) {
     return mapL;
 }
 
-
-
 document.addEventListener("DOMContentLoaded", () =>{
-    // const nordkalottleden2025Overview = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden2025_gesamt.gpx", 20, "nordkalottleden2025Overview", "#info_01");
+    const nordkalottleden2025Overview = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden2025_gesamt.gpx", "nordkalottleden2025Overview", "#info_00");
     const nordkalottleden2025Day1 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden01_processed.gpx", "nordkalottleden2025_1_map", "#info_01");
-    // const nordkalottleden2025Day2 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden02_processed.gpx", 2, "nordkalottleden2025_2_map");
-    // const nordkalottleden2025Day3 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden03_processed.gpx", 3, "nordkalottleden2025_3_map");
-    // const nordkalottleden2025Day4 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden04_processed.gpx", 4, "nordkalottleden2025_4_map");
-    // const nordkalottleden2025Day5 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden05_processed.gpx", 5, "nordkalottleden2025_5_map");
-    // const nordkalottleden2025Day6 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden06_processed.gpx", 6, "nordkalottleden2025_6_map");
-    // const nordkalottleden2025Day7 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden07_processed.gpx", 7, "nordkalottleden2025_7_map");
-    // const nordkalottleden2025Day8 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden08_processed.gpx", 8, "nordkalottleden2025_8_map");
-    // const nordkalottleden2025Day9 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden09_processed.gpx", 9, "nordkalottleden2025_9_map");
-    // const nordkalottleden2025Day10 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden10_processed.gpx", 10, "nordkalottleden2025_10_map");
-    // const nordkalottleden2025Day11 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden11_processed.gpx", 11, "nordkalottleden2025_11_map");
-    // const nordkalottleden2025Day12 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden12_processed.gpx", 12, "nordkalottleden2025_12_map");
-    // const nordkalottleden2025Day13 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden13_processed.gpx", 13, "nordkalottleden2025_13_map");
-    // const nordkalottleden2025Day14 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden14_processed.gpx", 14, "nordkalottleden2025_14_map");
-    // const nordkalottleden2025Day15 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden15_processed.gpx", 15, "nordkalottleden2025_15_map");
+    const nordkalottleden2025Day2 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden02_processed.gpx", "nordkalottleden2025_2_map", "#info_02");
+    const nordkalottleden2025Day3 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden03_processed.gpx", "nordkalottleden2025_3_map", "#info_03");
+    const nordkalottleden2025Day4 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden04_processed.gpx", "nordkalottleden2025_4_map", "#info_04");
+    const nordkalottleden2025Day5 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden05_processed.gpx", "nordkalottleden2025_5_map", "#info_05");
+    const nordkalottleden2025Day6 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden06_processed.gpx", "nordkalottleden2025_6_map", "#info_06");
+    const nordkalottleden2025Day7 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden07_processed.gpx", "nordkalottleden2025_7_map", "#info_07");
+    const nordkalottleden2025Day8 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden08_processed.gpx", "nordkalottleden2025_8_map", "#info_08");
+    const nordkalottleden2025Day9 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden09_processed.gpx", "nordkalottleden2025_9_map", "#info_09");
+    const nordkalottleden2025Day10 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden10_processed.gpx", "nordkalottleden2025_10_map", "#info_10");
+    const nordkalottleden2025Day11 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden11_processed.gpx", "nordkalottleden2025_11_map", "#info_11");
+    const nordkalottleden2025Day12 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden12_processed.gpx", "nordkalottleden2025_12_map", "#info_12");
+    const nordkalottleden2025Day13 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden13_processed.gpx", "nordkalottleden2025_13_map", "#info_13");
+    const nordkalottleden2025Day14 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden14_processed.gpx", "nordkalottleden2025_14_map", "#info_14");
+    const nordkalottleden2025Day15 = getGPXLeafletMap("gpx/Nordkalottleden2025/Nordkalottleden15_processed.gpx", "nordkalottleden2025_15_map", "#info_15");
 });

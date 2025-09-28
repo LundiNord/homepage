@@ -138,6 +138,7 @@ async function fetchPage() {
     const pages = ['/hiking/sweden2024.html', '/hiking/norwaySweden2023.html', '/hiking/mapViewer.html',
         '/hiking.html', '/index.html', '/privacy.html', '/hiking/norway2021.html', '/stats.html',
         '/blog/blog.html', '/blog/CommunicationAndDeploymentMicroservicesArchitecturePatterns.html', '/blog/riscvblockits.html',
+        '/hiking/nordkalottleden2025.html',
     ];
     for (const page of pages) {
         try {
