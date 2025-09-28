@@ -6,6 +6,13 @@
         <description>Blog.</description>
         <atom:link href="https://leonbruns.de/blog/rss.xml" rel="self" type="application/rss+xml" />
         <item>
+            <title>Cottonwood: Graph Database Search Engine</title>
+            <link>https://leonbruns.de/blog/cottonwood.html</link>
+            <guid>https://leonbruns.de/blog/cottonwood.html</guid>
+            <pubDate>15 Sep 2025 00:00:00 GMT</pubDate>
+            <description>Cottonwood: Graph Database Search Engine</description>
+        </item>
+        <item>
             <title>RISCJ Blockits Minecraft Mod</title>
             <link>https://leonbruns.de/blog/riscvblockits.html</link>
             <guid>https://leonbruns.de/blog/riscvblockits.html</guid>

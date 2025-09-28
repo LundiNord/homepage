@@ -6,6 +6,13 @@
         <description>Blog.</description>
         <atom:link href="https://leonbruns.de/hiking/rss.xml" rel="self" type="application/rss+xml" />
         <item>
+            <title>Nordkalottleden 2025</title>
+            <link>https://leonbruns.de/hiking/nordkalottleden2025.html</link>
+            <guid>https://leonbruns.de/hiking/nordkalottleden2025.html</guid>
+            <pubDate>20 Sep 2025 00:00:00 GMT</pubDate>
+            <description>Kobbvatnet - Riksgränsen</description>
+        </item>
+        <item>
             <title>North Sweden 2024</title>
             <link>https://leonbruns.de/hiking/sweden2024.html</link>
             <guid>https://leonbruns.de/hiking/sweden2024.html</guid>
