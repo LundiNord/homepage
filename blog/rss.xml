@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Blog of Leon Bruns</title>
+        <link>https://leonbruns.de/blog/blog.html</link>
+        <description>Blog.</description>
+        <atom:link href="https://leonbruns.de/blog/rss.xml" rel="self" type="application/rss+xml" />
+        <item>
+            <title>Cottonwood: Graph Database Search Engine</title>
+            <link>https://leonbruns.de/blog/cottonwood.html</link>
+            <guid>https://leonbruns.de/blog/cottonwood.html</guid>
+            <pubDate>15 Sep 2025 00:00:00 GMT</pubDate>
+            <description>Cottonwood: Graph Database Search Engine</description>
+        </item>
+        <item>
+            <title>RISCJ Blockits Minecraft Mod</title>
+            <link>https://leonbruns.de/blog/riscvblockits.html</link>
+            <guid>https://leonbruns.de/blog/riscvblockits.html</guid>
+            <pubDate>15 Mar 2024 00:00:00 GMT</pubDate>
+            <description>RISCJ Blockits Minecraft Mod.</description>
+        </item>
+        <item>
+            <title>Communication and Deployment Microservices Architecture Patterns</title>
+            <link>https://leonbruns.de/blog/CommunicationAndDeploymentMicroservicesArchitecturePatterns.html</link>
+            <guid>https://leonbruns.de/blog/CommunicationAndDeploymentMicroservicesArchitecturePatterns.html</guid>
+            <pubDate>31 Jul 2024 00:00:00 GMT</pubDate>
+            <description>Communication and Deployment Microservices Architecture Patterns.</description>
+        </item>
+    </channel>
+</rss>

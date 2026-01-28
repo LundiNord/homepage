@@ -9,7 +9,10 @@
     <meta property="og:description" content="Blog of Leon Bruns">
     <meta property="og:title" content="Blog">
     <meta property="og:type" content="article">
-    <meta property="og:image" content="https://leonbruns.de/hiking/images/mima.jpg">
+    <meta property="og:image" content="https://leonbruns.de/blog/images/mima.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="879">
+    <meta property="og:image:height" content="746">
     <link id="css" rel="stylesheet" type="text/css" href="../index.css">
     <link id="css2" rel="stylesheet" type="text/css" href="blog.css">
     <script src="../index.minified.js" type="module"></script>
@@ -37,20 +40,40 @@
 <nav class="toc">
     <h2 data-lang="toc">Table of Contents</h2>
     <ul>
+        <li><a href="#Cottonwood">Cottonwood: Graph Database Search Engine</a></li>
         <li><a href="#RiscvMod">RISCJ Blockits Minecraft Mod</a></li>
         <li><a href="#proseminar">Communication and Deployment Microservices Architecture Patterns</a></li>
     </ul>
 </nav>
 
 <main>
-    <h2 id="RiscvMod">RISCJ Blockits Minecraft Mod</h2>
+    <div class="headline-row">
+        <h2 id="Cottonwood">Cottonwood: Graph Database Search Engine</h2>
+        <div class="date">4.9.25, en</div>
+    </div>
+    <a href="cottonwood.html">
+        <div class="image-container"> <img src="images/architecture.png" alt="Architecture Overview of Cottonwood" loading="lazy"> </div>
+    </a>
+    <a href="cottonwood.html">See Presentation</a>
+    <br>
+    <a href="https://codeberg.org/christopher-besch/cottonwood"
+       data-umami-event="outbound-link-click"
+       data-umami-event-url="https://codeberg.org/christopher-besch/cottonwood"
+    >See Git Repo</a>
+
+    <div class="headline-row">
+        <h2 id="RiscvMod">RISCJ Blockits Minecraft Mod</h2>
+        <div class="date">15.3.24, de</div>
+    </div>
     <a href="riscvblockits.html">
         <div class="image-container"> <img src="images/mima.jpeg" alt="Tree Overview of Architecture Patterns" loading="lazy"> </div>
     </a>
     <a href="riscvblockits.html" data-lang="read_article">Read Article</a>
 
-
-    <h2 id="proseminar">Communication and Deployment Microservices Architecture Patterns</h2>
+    <div class="headline-row">
+        <h2 id="proseminar">Communication and Deployment Microservices Architecture Patterns</h2>
+        <div class="date">31.7.24, en</div>
+    </div>
     <a href="CommunicationAndDeploymentMicroservicesArchitecturePatterns.html">
         <div class="image-container"> <img src="images/patterns.jpeg" alt="Mima Style Computer" loading="lazy"> </div>
     </a>
@@ -62,6 +85,13 @@
     <br> <br> <br>
     <p> -------------------------------------------------- </p>
     <p>
+        <a href="rss.xml"
+           data-umami-event="outbound-link-click"
+           data-umami-event-url="https://leonbruns.de/blog/rss.xml"
+           class="privacy-link"
+           onclick="navigator.clipboard.writeText(location.origin + '/blog/rss.xml'); return false;"
+        >RSS</a>
+        |
         <a href="../privacy.html" class="privacy-link" data-lang="privacy">Privacy</a>
         |
         <a href="https://github.com/LundiNord/homepage"

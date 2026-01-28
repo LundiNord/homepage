@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bookmarks</title>
+    <meta name="description" content="Personal Webpage of Leon Bruns">
+    <meta name="keywords" content="Bookmarks, Links">
+    <link id="css" rel="stylesheet" type="text/css" href="/index.css">
+    <script src="/index.minified.js" type="module"></script>
+    <script defer src="https://analyse.nyxnord.de/script.js" data-website-id="a95c5f81-f3c3-4673-b356-ff7091def24b"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+
+<body>
+<header id="head">
+    <div class="header-right">
+        <a href="/index.html" class="privacy-link" data-lang="back">back</a>
+        |
+        <button class="theme-toggle">Toggle Dark Mode</button>
+    </div>
+    <h1>Leon Bruns.</h1>
+    <div class="search-box">
+        <label for="search" style="display: none">Search</label><input type="text" id="search" placeholder="Search..."/>
+        <div id="search-results"></div>
+    </div>
+    <aside>Bookmarks.</aside>
+    <p class="dashes">
+        --------------------------------------------------
+    </p>
+</header>
+
+<nav id="projects">
+    <h2 data-lang="toc">Table of Contents</h2>
+    <ul>
+        <li><a href="#blogs">Blogs</a></li>
+        <li><a href="#tools">IT Tools</a></li>
+        <li><a href="#other">Other</a></li>
+    </ul>
+</nav>
+
+<main id="main">
+    <p>
+        Random dump of Websites i like.
+        Mostly so i dont forget them...
+    </p>
+    <h2 id="blogs">Blogs</h2>
+    <ul>
+        <li><a href="https://tarnkappe.info/">tarnkappe.info</a>: Independent Tech-Blog (German)</li>
+        <li><a href="https://www.kuketz-blog.de/">Kuketz-Blog</a>: Tech Blog focused on IT Security (German)</li>
+        <li><a href="https://chris-besch.com/">Chris' Place</a>: Blog about various IT Topics</li>
+    </ul>
+
+    <h2 id="tools">IT Tools</h2>
+    <ul>
+        <li><a href="https://search.censys.io/">Censys Search</a>: Info about all IP Addresses and Domains</li>
+        <li><a href="https://yopad.eu/">YoPad</a>: Quick Temporary Collaborative Pad</li>
+        <li><a href="https://m.dict.cc/deen/">dict.cc</a>: my favorite oldschool translator</li>
+        <li><a href="https://toolbox.googleapps.com/apps/dig/">Online Dig</a>: quickly check DNS records</li>
+        <li><a href="https://speed.cloudflare.com/">Cloudflare Speed Test</a>: speed test with extra info</li>
+        <li><a href="https://browserleaks.com/">Browserleaks</a>: check what your browser leaks</li>
+    </ul>
+
+    <h2 id="other">Other</h2>
+    <ul>
+        <li><a href="https://kachelmannwetter.com/">kachelmannwetter</a>: very detailed weather reporting with many models</li>
+        <li><a href="https://gpx.studio/app">gpx studio</a>: edit and create gpx files online</li>
+    </ul>
+
+</main>
+
+<footer id="footer">
+    <p> -------------------------------------------------- </p>
+    <p>
+        <a href="privacy.html" class="privacy-link" data-lang="privacy">Privacy</a>
+        |
+        <a href="https://github.com/LundiNord/homepage">Source</a>
+        |
+        <a href="https://status.leonbruns.de/">Status</a>
+        |
+        <a href="https://github.com/bryanbraun/your-life?tab=readme-ov-file"
+           data-lang="inspired-by"
+        >Inspired by</a>
+    </p>
+</footer>
+
+<script type="text/javascript">
+    (() => {
+        const name = 'outbound-link-click';
+        document.querySelectorAll('a').forEach(a => {
+            if (a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
+                a.setAttribute('data-umami-event', name);
+                a.setAttribute('data-umami-event-url', a.href);
+            }
+        });
+    })();
+</script>
+
+</body>
+</html>

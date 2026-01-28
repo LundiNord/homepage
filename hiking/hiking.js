@@ -107,9 +107,6 @@ export function getGPXLeafletMap(gpxTrack, day, containerID) {
             infoDiv.querySelector(`.distance`).textContent = (gpx.get_distance() / 1000).toFixed(2);
             infoDiv.querySelector(`.duration`).textContent = gpx.get_duration_string(gpx.get_moving_time());
             infoDiv.querySelector(`.pace`).textContent = gpx.get_duration_string(gpx.get_moving_pace(), true);
-            // infoDiv.querySelector(`.elevation-gain`).textContent = gpx.get_elevation_gain().toFixed(0);
-            // infoDiv.querySelector(`.elevation-loss`).textContent = gpx.get_elevation_loss().toFixed(0);
-            // infoDiv.querySelector(`.elevation-net`).textContent = (gpx.get_elevation_gain() - gpx.get_elevation_loss()).toFixed(0);
         }
     }).addTo(mapL);
     return mapL;
