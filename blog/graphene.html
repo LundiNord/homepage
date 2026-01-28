@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!--suppress HtmlUnknownAnchorTarget -->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Graphene OS setup.</title>
+    <meta name="description" content="Blog of Leon Bruns">
+    <meta name="keywords" content="Leon Bruns, Webpage, Blog, Google, Graphene OS, Setup, Privacy, Security, Android">
+    <meta property="og:description" content="Graphene OS setup">
+    <meta property="og:title" content="Blog of Leon Bruns">
+    <meta property="og:type" content="article">
+<!--    <meta property="og:image" content="https://leonbruns.de/hiking/images/mima.jpg">-->
+    <link id="css" rel="stylesheet" type="text/css" href="../index.css">
+    <link id="css2" rel="stylesheet" type="text/css" href="blog.css">
+    <script src="../index.minified.js" async type="module"></script>
+    <script defer src="https://analyse.nyxnord.de/script.js" data-website-id="a95c5f81-f3c3-4673-b356-ff7091def24b"></script>
+</head>
+
+<body>
+<header>
+    <div class="header-right">
+        <a href="blog.html" class="privacy-link" data-lang="back">back</a>
+        |
+        <button class="theme-toggle">Dark Mode</button>
+    </div>
+    <h1>Blog.</h1>
+    <div class="search-box">
+        <label for="search" style="display: none">Search</label><input type="text" id="search" placeholder="Search..."/>
+        <div id="search-results"></div>
+    </div>
+    <aside>Graphene OS setup.</aside>
+    <p class="dashes">
+        --------------------------------------------------
+    </p>
+</header>
+
+<nav class="toc">
+    <h2 data-lang="toc">Table of Contents</h2>
+    <ul>
+        <li><a href="#general">General</a></li>
+        <li><a href="#apps">Standard Apps</a></li>
+        <li><a href="#push">Push Notifications</a></li>
+        <li><a href="#app_stores">Getting Apps</a></li>
+        <li><a href="#garmin">Support for Garmin watches</a></li>
+    </ul>
+</nav>
+
+<main>
+    <br>
+    <h2 id="general">General</h2>
+    <p>
+        Graphene OS is a privacy and security-focused mobile operating system based on Android.
+        I recommend not installing Google Play Services on your Owner user account.
+        Instead, you can create a separate user account for apps that require Google Play Services like banking apps.
+    </p>
+
+    <br>
+    <h2 id="apps">Standard Apps</h2>
+    <p>
+        The default apps in Graphene OS are quite minimalistic. Here are some open source recommended replacements:
+    <ul>
+        <li>Fossify: <a href="https://www.fossify.org/apps/">Calendar, Contacts, File Manager, Gallery, Messages, Keyboard, Clock, Notes</a></li>
+        <li><a href="https://www.thunderbird.net/en-US/thunderbird/all/">Thunderbird</a> or <a href="https://email.faircode.eu/">FairMail</a></li>
+        <li><a href="https://github.com/tasks/tasks">Tasks</a> </li>
+        <li><a href="https://www.davx5.com/">DAVx⁵</a>: CalDAV/CardDAV/WebDAV sync</li>
+        <li><a href="https://icsx5.bitfire.at/">ICSx⁴</a>: Webcal sync</li>
+        <li><a href="https://www.comaps.app/">CoMaps</a>: OpenStreetMap client</li>
+    </ul>
+    </p>
+
+    <br>
+    <h2 id="push">Push Notifications</h2>
+    <p>
+        Graphene OS does not come with Google Play Services, which means that push notifications do not work out of the box.
+        On normal Android all apps use Google Firebase for push notifications.
+        An alternative is <a href="https://unifiedpush.org/">Unified Push</a>.
+        To use Unified Push, you need to install a Unified Push compatible notification service.
+        I recommend <a href="https://codeberg.org/Sunup/android">Sunup</a>.
+    </p>
+    <h3>Signal Push Notifications</h3>
+    <p>
+        The standard Signal app does not support Unified Push.
+        You can use <a href="https://molly.im/">Molly</a>, which is a fork of Signal that supports Unified Push.
+        To enable Unified Push in Molly, go to Settings -> Notifications -> Delivery service and select Unified Push.
+        Then configure Unified Push to use Sunup as the distributor app.
+        As a MollySocket Server you can use <a href="https://molly.nyxnord.de/">molly.nyxnord.de</a>.
+        Note that I give no uptime guarantees for this server.
+    </p>
+    <h3>Good apps using unified push</h3>
+    <p>
+        <ul>
+            <li><a href="https://tusky.app/">Tusky</a>: Mastodon CLient</li>
+            <li><a href="https://github.com/nucleus-ffm/foss_warn">FOSS Warn</a>: receive emergency alerts</li>
+        </ul>
+    </p>
+
+    <br>
+    <h2 id="app_stores">Getting Apps</h2>
+    <p>
+        Most apps can be found on <a href="https://f-droid.org/">F-Droid</a>, which is an open source app store.
+        For apps that are only available on Google Play Store, you can use <a href="https://store.auroraoss.com/">Aurora Store</a>, which is a Google Play Store client that does not require a Google account.
+        <a href="https://obtainium.imranr.dev/">Obtanium</a> is a helper app that can help you to download APKs from various sources and also keeps them up to date.
+    </p>
+
+    <br>
+    <h2 id="garmin">Support for Garmin watches</h2>
+    <p>
+        On Android, the garmin connect app is not really needed.
+        A better and more private alternative is <a href="https://gadgetbridge.org/">Gadgetbridge</a>.
+        It supports most Garmin watches and can sync and display all data via Bluetooth.
+        If you also install <a href="https://github.com/breezy-weather/breezy-weather">Breezy Weather</a>, it will send weather data to your watch without Garmin Connect.
+    </p>
+
+
+</main>
+
+<footer>
+    <br> <br>
+    <p> -------------------------------------------------- </p>
+    <p>
+        <a href="../privacy.html" class="privacy-link" data-lang="privacy">Privacy</a>
+        |
+        <a href="https://github.com/LundiNord/homepage">Source</a>
+        |
+        <a href="https://status.leonbruns.de/">Status</a>
+    </p>
+</footer>
+
+<script type="text/javascript">
+    (() => {
+        const name = 'outbound-link-click';
+        document.querySelectorAll('a').forEach(a => {
+            if (a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
+                a.setAttribute('data-umami-event', name);
+                a.setAttribute('data-umami-event-url', a.href);
+            }
+        });
+    })();
+</script>
+
+</body>
+</html>
